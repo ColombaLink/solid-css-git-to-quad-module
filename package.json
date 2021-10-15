@@ -50,6 +50,7 @@
     "@types/rdf-js": "^4.0.0",
     "@types/streamify-array": "^1.0.0",
     "arrayify-stream": "^1.0.0",
+    "fs-extra": "^10.0.0",
     "node-fetch": "^2.6.1",
     "rdf-parse": "^1.9.1",
     "rdf-serialize": "^1.2.0",
@@ -63,6 +64,7 @@
   "devDependencies": {
     "@solid/community-server": "^1.1.0",
     "@tsconfig/node14": "^1.0.0",
+    "@types/fs-extra": "^9.0.13",
     "@types/jest": "^27.0.1",
     "@typescript-eslint/eslint-plugin": "^4.11.1",
     "@typescript-eslint/parser": "^4.11.1",

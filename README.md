@@ -18,3 +18,9 @@ Of course, you can also just run the commands manually or clone the repo.
 
 TODO: add links to CSS and Components.js documentation
 
+Clients write the full yjs doc as binary to the serve with post and put 
+
+but for reading there are two options: 
+
+get content type = binary 
+get content type = RDF -> then we read the bianry file parse it and transform it to RDF

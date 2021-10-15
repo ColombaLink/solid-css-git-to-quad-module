@@ -39,21 +39,8 @@
   "@graph": [
     {
       "comment": "A single-pod server that stores its resources in memory."
-    },
-
-
-    {
-      "@id": "solid-server:RegexRouterRule",
-      "RegexRouterRule:_storeMap": [
-        {
-          "RegexRouterRule:_storeMap_key": "^/home$",
-          "RegexRouterRule:_storeMap_value": { "@id": "solid-crdt:YdocStore" }
-        },
-        {
-          "RegexRouterRule:_storeMap_key": ".*",
-          "RegexRouterRule:_storeMap_value": { "@id": "solid-server:MemoryResourceStore" }
-        }
-      ]
     }
+
+
   ]
 }
