@@ -38,21 +38,32 @@
     "build:ts": "tsc",
     "lint": "eslint . --cache",
     "prepare": "npm run build",
-    "start": "npm run build && npm run build && npx community-solid-server -c config/default.json  -m ."
+    "start": "npm run build && npm run build && npx community-solid-server -c config/default.json  -m .",
+    "test:integration": "jest --coverageReporters text-summary -- test/integration",
+    "test:unit": "jest --config=./jest.coverage.config.js test/unit",
+    "test:watch": "jest --coverageReporters none --watch test/unit"
   },
   "dependencies": {
     "@rdfjs/data-model": "^1.2.0",
+    "@types/arrayify-stream": "^1.0.0",
     "@types/node-fetch": "^2.5.7",
     "@types/rdf-js": "^4.0.0",
+    "@types/streamify-array": "^1.0.0",
+    "arrayify-stream": "^1.0.0",
     "node-fetch": "^2.6.1",
-    "urijs": "^1.19.5"
+    "rdf-parse": "^1.9.1",
+    "rdf-serialize": "^1.2.0",
+    "streamify-array": "^1.0.1",
+    "urijs": "^1.19.5",
+    "yjs": "^13.5.13"
   },
   "peerDependencies": {
     "@solid/community-server": "^0.8.1"
   },
   "devDependencies": {
-    "@solid/community-server": "^1.0.0-beta.0",
+    "@solid/community-server": "^1.1.0",
     "@tsconfig/node14": "^1.0.0",
+    "@types/jest": "^27.0.1",
     "@typescript-eslint/eslint-plugin": "^4.11.1",
     "@typescript-eslint/parser": "^4.11.1",
     "componentsjs-generator": "^2.0.0",
@@ -62,6 +73,8 @@
     "eslint-plugin-tsdoc": "^0.2.10",
     "eslint-plugin-unused-imports": "^1.0.1",
     "husky": "^4.3.6",
+    "jest": "^26.0.1",
+    "ts-jest": "^26.3.0",
     "typescript": "^4.1.3"
   }
 }
