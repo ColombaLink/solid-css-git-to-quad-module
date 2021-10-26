@@ -40,6 +40,10 @@
     {
       "comment": "A single-pod server that stores its resources in memory."
     },
+    {
+      "@id": "solid-crdt:default:YjsDocToQuadConverter",
+      "@type": "YjsDocToQuadConverter"
+    },
 
 
     {
