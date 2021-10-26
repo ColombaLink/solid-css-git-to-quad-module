@@ -1,0 +1,19 @@
+{
+  "@context": [
+    "https://linkedsoftwaredependencies.org/bundles/npm/crdt-module/^1.0.0/components/context.jsonld",
+    "https://linkedsoftwaredependencies.org/bundles/npm/@solid/community-server/^1.0.0/components/context.jsonld",
+    {
+      "solid-crdt": "urn:solid-crdt:default:",
+      "solid-server": "urn:solid-server:default:"
+    }
+  ],
+
+  "@graph": [
+    {
+      "comment": "Converts many RDF serialization to Quad objects.",
+      "@id": "solid-crdt:YjsDocToQuadConverter",
+      "@type": "YjsDocToQuadConverter"
+
+    }
+  ]
+}

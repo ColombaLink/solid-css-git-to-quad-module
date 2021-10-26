@@ -1,11 +1,21 @@
 {
-  "@context": "https://linkedsoftwaredependencies.org/bundles/npm/@solid/community-server/^1.0.0/components/context.jsonld",
+  "@context": [
+    "https://linkedsoftwaredependencies.org/bundles/npm/crdt-module/^1.0.0/components/context.jsonld",
+    "https://linkedsoftwaredependencies.org/bundles/npm/@solid/community-server/^1.0.0/components/context.jsonld",
+    {
+      "solid-crdt": "urn:solid-crdt:default:",
+      "solid-server": "urn:solid-server:default:"
+    }
+  ],
+
   "import": [
     "files-scs:config/util/representation-conversion/converters/content-type-replacer.json",
     "files-scs:config/util/representation-conversion/converters/errors.json",
     "files-scs:config/util/representation-conversion/converters/markdown.json",
     "files-scs:config/util/representation-conversion/converters/quad-to-rdf.json",
-    "files-scs:config/util/representation-conversion/converters/rdf-to-quad.json"
+    "files-scs:config/util/representation-conversion/converters/rdf-to-quad.json",
+
+    "files-cm:config/conv.json"
   ],
   "@graph": [
 
@@ -51,6 +61,9 @@
             },
             {
               "@id": "urn:solid-server:default:MarkdownToHtmlConverter"
+            },
+            {
+              "@id": "solid-crdt:YjsDocToQuadConverter"
             }
           ]
         }
