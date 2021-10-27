@@ -11,8 +11,8 @@
   "@graph": [
     {
       "comment": "Converts many RDF serialization to Quad objects.",
-      "@id": "solid-crdt:YjsDocToQuadConverter",
-      "@type": "YjsDocToQuadConverter"
+      "@id": "solid-crdt:YjsUpdateToQuadConverter",
+      "@type": "YjsUpdateToQuadConverter"
 
     }
   ]

@@ -1,6 +1,6 @@
 import type { Doc } from 'yjs/dist/src/utils/Doc';
 import type { Quad } from 'rdf-js';
-import {namedNode, quad, triple} from "@rdfjs/data-model";
+import {namedNode, triple} from "@rdfjs/data-model";
 import {YMap} from "yjs/dist/src/types/YMap";
 
 export class YjsUtils {
@@ -12,8 +12,8 @@ export class YjsUtils {
        const p_o = graph.get(subject) as YMap<YMap<boolean>>;
        const predicates = p_o.keys();
        for(let predicate of predicates){
-           // we dont care about the boolean, we choose them because we needed something to represent a set
-           // and using a Map is the most simple and expressive way to do so
+           // We dont care about the boolean as it is just a placeholder.
+           // Representing RDF by using a Y.Map is the simplest way for now.
            const objects= p_o.get(predicate)!.keys();
            for (let object of objects){
                const q = triple(namedNode(subject),namedNode(predicate), namedNode(object));

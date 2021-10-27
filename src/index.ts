@@ -3,4 +3,4 @@ export * from './logging/CustomLoggerFactory';
 export * from './logging/CustomLogger';
 
 // Storage
-export * from './storage/YdocStore';
+export * from './storage/conversion/YjsUpdateToQuadConverter';

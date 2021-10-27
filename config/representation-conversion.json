@@ -45,6 +45,9 @@
           "@type": "ChainedConverter",
           "converters": [
             {
+              "@id": "solid-crdt:YjsUpdateToQuadConverter"
+            },
+            {
               "@id": "urn:solid-server:default:RdfToQuadConverter"
             },
             {
@@ -61,9 +64,6 @@
             },
             {
               "@id": "urn:solid-server:default:MarkdownToHtmlConverter"
-            },
-            {
-              "@id": "solid-crdt:YjsDocToQuadConverter"
             }
           ]
         }

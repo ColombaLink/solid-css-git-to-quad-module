@@ -51,10 +51,12 @@
     "@types/streamify-array": "^1.0.0",
     "arrayify-stream": "^1.0.0",
     "fs-extra": "^10.0.0",
+    "jest-rdf": "^1.7.0",
     "node-fetch": "^2.6.1",
     "rdf-parse": "^1.9.1",
     "rdf-serialize": "^1.2.0",
     "streamify-array": "^1.0.1",
+    "to-readable-stream": "^1.0.0",
     "urijs": "^1.19.5",
     "yjs": "^13.5.13"
   },
