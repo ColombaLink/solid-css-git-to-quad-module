@@ -34,6 +34,4 @@ describe('SSB Id to quad converter', () => {
             triple(blankNode('_:b1'), namedNode("http://www.w3.org/ns/auth/cert#identiy"), namedNode(id.id)),
          ]);
     });
-
-
 })
