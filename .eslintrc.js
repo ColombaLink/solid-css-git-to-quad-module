@@ -23,6 +23,7 @@ module.exports = {
     '@typescript-eslint/no-unused-vars': ['error', { args: 'none' }],
     '@typescript-eslint/no-unnecessary-condition': 'off',
     '@typescript-eslint/space-before-function-paren': ['error', 'never'],
+    '@typescript-eslint/consistent-type-definitions': 'off',
     'array-bracket-spacing': ['error', 'never'],
     'class-methods-use-this': 'off',
     'comma-dangle': ['error', 'always-multiline'],
