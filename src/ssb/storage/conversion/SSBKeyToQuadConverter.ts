@@ -6,7 +6,7 @@ import {
   TypedRepresentationConverter
 } from "@solid/community-server";
 import {applyUpdate, Doc} from "yjs";
-import {YjsUtils} from "../../util/YjsUtil";
+import {YjsUtils} from "../../../util/YjsUtil";
 import {blankNode, namedNode, triple} from "@rdfjs/data-model";
 import {Keys} from "ssb-keys";
 

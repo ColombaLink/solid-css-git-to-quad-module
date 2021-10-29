@@ -1,4 +1,4 @@
-import {getDefaultVariables, getTestConfigPath, instantiateFromConfig} from "./Config";
+import {getDefaultVariables, getTestConfigPath, instantiateFromConfig} from "../Config";
 import {App, APPLICATION_OCTET_STREAM} from "@solid/community-server";
 import {stringify} from "querystring";
 import fetch from "node-fetch";

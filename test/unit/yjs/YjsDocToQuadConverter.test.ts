@@ -8,7 +8,7 @@ import {
 } from "@solid/community-server";
 import arrayifyStream = require("arrayify-stream");
 import {namedNode, triple} from "@rdfjs/data-model";
-import {YjsDocToQuadConverter} from "../../dist/storage/conversion/YjsDocToQuadConverter";
+import {YjsDocToQuadConverter} from "../../../dist/storage/conversion/YjsDocToQuadConverter";
 import {Doc, encodeStateAsUpdate, Map} from "yjs";
 import streamifyArray = require("streamify-array");
 

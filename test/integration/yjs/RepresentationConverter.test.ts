@@ -3,8 +3,8 @@ import {
   BasicRepresentation,
   ChainedConverter, INTERNAL_QUADS, QuadToRdfConverter, readableToString, RepresentationMetadata, ResourceIdentifier
 } from "@solid/community-server";
-import {YjsUpdateToQuadConverter} from "../../src/storage/conversion/YjsUpdateToQuadConverter";
-import {YjsFactory} from "../util/YjsFactory";
+import {YjsUpdateToQuadConverter} from "../../../src/yjs/storage/conversion/YjsUpdateToQuadConverter";
+import {YjsFactory} from "../../util/YjsFactory";
 
 describe('A ChainedConverter', (): void => {
   const converters = [

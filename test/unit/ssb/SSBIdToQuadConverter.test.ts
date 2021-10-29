@@ -6,7 +6,7 @@ import {
     ResourceIdentifier
 } from "@solid/community-server";
 import {blankNode, namedNode, triple} from "@rdfjs/data-model";
-import {SSBIdToQuadConverter} from "../../src/storage/conversion/SSBKeyToQuadConverter";
+import {SSBIdToQuadConverter} from "../../../src/ssb/storage/conversion/SSBKeyToQuadConverter";
 import streamifyArray = require("streamify-array");
 import arrayifyStream = require("arrayify-stream");
 

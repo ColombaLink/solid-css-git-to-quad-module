@@ -1,6 +1,6 @@
 import streamifyArray from 'streamify-array';
 import {Map, Doc} from "yjs";
-import {YjsUtils} from "../../src/util/YjsUtil";
+import {YjsUtils} from "../../../src/util/YjsUtil";
 import rdfSerializer from 'rdf-serialize';
 import {readableToString} from "@solid/community-server";
 import type {Readable} from "stream";

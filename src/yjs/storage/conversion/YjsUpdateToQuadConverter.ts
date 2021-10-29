@@ -6,7 +6,7 @@ import {
   TypedRepresentationConverter
 } from "@solid/community-server";
 import {applyUpdate, Doc} from "yjs";
-import {YjsUtils} from "../../util/YjsUtil";
+import {YjsUtils} from "../../../util/YjsUtil";
 
 /**
  * Converts `application/yjs+update` to `internal/quads`.
