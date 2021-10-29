@@ -15,7 +15,7 @@ import { ValidMessage } from 'ssb-validate';
 
 describe('SSB Id to quad converter', () => {
     const converter = new SSBMsgToQuadConverter();
-    const identifier: ResourceIdentifier = { path: 'path' };
+    const identifier: ResourceIdentifier = { path: 'https://test.com/doc/.ssb/objects/messages/%currentHashiROQsc=.sha256' };
     const message: ValidMessage = {
         "previous": "%Ys5adZpG5bElsmckVbAR3IRMJEREuEgfniHQViROQsc=.sha256",
         "sequence": 2,
@@ -45,6 +45,7 @@ describe('SSB Id to quad converter', () => {
             triple(subject, namedNode(AS.actor), namedNode(message.author)),
             triple(subject, namedNode(AS.content), namedNode(message.content)),
             triple(subject, namedNode(XSD.date), namedNode(message.timestamp.toString())),
+            triple(subject, namedNode("https://scuttlebutt.nz/ns/v1#previous"), namedNode(`https://test.com/doc/.ssb/objects/messages/%Ys5adZpG5bElsmckVbAR3IRMJEREuEgfniHQViROQsc=.sha256`)),
             triple(subject, namedNode("https://w3id.org/security/v1#digest"), digest),
 
             triple(digest, namedNode(RDF.type), namedNode("https://w3id.org/security/v1#Digest")),

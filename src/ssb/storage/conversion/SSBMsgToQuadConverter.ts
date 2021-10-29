@@ -1,9 +1,9 @@
 import {
-  BasicRepresentation,
-  getLoggerFor, INTERNAL_QUADS, RDF,
-  Representation,
-  RepresentationConverterArgs,
-  TypedRepresentationConverter
+    BasicRepresentation,
+    getLoggerFor, INTERNAL_QUADS, RDF,
+    Representation,
+    RepresentationConverterArgs, ResourceIdentifier,
+    TypedRepresentationConverter
 } from "@solid/community-server";
 import {applyUpdate, Doc} from "yjs";
 import {YjsUtils} from "../../../util/YjsUtil";
@@ -11,13 +11,14 @@ import {blankNode, namedNode, triple} from "@rdfjs/data-model";
 import {Keys} from "ssb-keys";
 import {ValidMessage} from "ssb-validate";
 import {AS, XSD} from "@inrupt/vocab-common-rdf";
+import { NamedNode } from "rdf-js";
 
 /**
  * Converts `application/ssb-msg` to `internal/quads`.
  */
 export class SSBMsgToQuadConverter extends TypedRepresentationConverter {
   protected readonly logger = getLoggerFor(this);
-  public constructor() {
+  public constructor(private storePath:string = ".ssb/objects/messages") {
     super(
         {"application/ssb-msg": 1},
         {"internal/quads": 1}
@@ -38,6 +39,7 @@ export class SSBMsgToQuadConverter extends TypedRepresentationConverter {
         triple(subject, namedNode(AS.actor), namedNode(message.author)),
         triple(subject, namedNode(AS.content), namedNode(message.content)),
         triple(subject, namedNode(XSD.date), namedNode(message.timestamp.toString())),
+        triple(subject, namedNode("https://scuttlebutt.nz/ns/v1#previous"), this.getPreviousMessageURI(identifier, message.previous)),
         triple(subject, namedNode("https://w3id.org/security/v1#digest"), digest),
 
         triple(digest, namedNode(RDF.type), namedNode("https://w3id.org/security/v1#Digest")),
@@ -48,4 +50,11 @@ export class SSBMsgToQuadConverter extends TypedRepresentationConverter {
 
     return new BasicRepresentation(quads, representation.metadata, INTERNAL_QUADS);
   }
+
+    private getPreviousMessageURI(identifier: ResourceIdentifier, previous: string): NamedNode {
+        return namedNode(identifier.path.replace(
+            new RegExp(`${this.storePath}.*` ),
+            `${this.storePath}/${previous}`
+        ))
+    }
 }
