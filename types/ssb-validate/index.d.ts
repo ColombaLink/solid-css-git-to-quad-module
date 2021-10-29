@@ -17,7 +17,7 @@ declare module 'ssb-validate' {
     timestamp: number;
   };
 
-  type ValidMessage = {
+  export type ValidMessage = {
     previous: Id;
     sequence: number;
     author: Id;
