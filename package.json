@@ -54,6 +54,7 @@
     "fs-extra": "^10.0.0",
     "jest-rdf": "^1.7.0",
     "node-fetch": "^2.6.1",
+    "nodegit": "^0.27.0",
     "rdf-parse": "^1.9.1",
     "rdf-serialize": "^1.2.0",
     "ssb-keys": "^8.2.0",
@@ -71,6 +72,7 @@
     "@tsconfig/node14": "^1.0.0",
     "@types/fs-extra": "^9.0.13",
     "@types/jest": "^27.0.1",
+    "@types/nodegit": "^0.27.0",
     "@types/ssb-keys": "^7.2.0",
     "@typescript-eslint/eslint-plugin": "^4.11.1",
     "@typescript-eslint/parser": "^4.11.1",
@@ -82,6 +84,7 @@
     "eslint-plugin-unused-imports": "^1.0.1",
     "husky": "^4.3.6",
     "jest": "^26.0.1",
+    "nodegit": "^0.27.0",
     "ts-jest": "^26.3.0",
     "typescript": "^4.1.3"
   }

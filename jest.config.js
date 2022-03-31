@@ -7,11 +7,7 @@ module.exports = {
   transform: {
     '^.+\\.ts$': 'ts-jest',
   },
-  testRegex: '/test/(unit|integration|playground)/.*\\.test\\.ts$',
-  moduleFileExtensions: [
-    'ts',
-    'js',
-  ],
+
   testEnvironment: 'node',
   setupFilesAfterEnv: ['<rootDir>/test/util/SetupTests.ts'],
   collectCoverage: true,
