@@ -19,6 +19,8 @@ describe("A Git Doc Controller GDocController", () => {
 
             let y = await gitBinaryTestingPrefix.readFromPodAsBuffer(".test-folder", x)
             console.log(" Blob "+i);
+            console.log(" Blob oid"+y);
+
         }
 
         //console.log(y + "  content of Blob")
@@ -29,6 +31,8 @@ describe("A Git Doc Controller GDocController", () => {
 
             let xy = await gitBinaryTestingPrefix.readFromPodAsBuffer(".test-folder", xx)
             console.log(" tree "+ j);
+            console.log(" tree oid  "+ xy);
+
         }
 
         //console.log( xy + " tree")

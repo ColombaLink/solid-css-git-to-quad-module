@@ -13,6 +13,7 @@ import {Doc, encodeStateAsUpdate, Map} from "yjs";
 import streamifyArray = require("streamify-array");
 import {gitBinaryTestingPrefix} from "./gitBinaryTestingPrefix";
 import fs from "fs";
+import {unzipSync} from "zlib";
 
 describe('...', () => {
 
@@ -40,18 +41,24 @@ describe('...', () => {
         let blobHash = await gitBinaryTestingPrefix.initPodWriteTree()
         let blobBuffer =await gitBinaryTestingPrefix.readFromPodAsBuffer(".test-folder", blobHash)
 
-
         //console.log(blobBuffer) //here it is readable
+        //console.log("hash:  "+blobHash.tostrS())
+
+        let unzippi= unzipSync(blobBuffer)
+
+
+        let blobSlice= unzippi.slice(unzippi.length-20,unzippi.length)
+        //console.log(blobSlice.toString('hex')) // good
+
 
         const data = streamifyArray([blobBuffer])
-
-        console.log("readable  "+ data)
+        //console.log("readable  "+ data)
         const representation = new BasicRepresentation(data,metadata);
 
         const preferences: RepresentationPreferences = { type: { [INTERNAL_QUADS]: 1 }};
         const result = await converter.handle({ identifier, representation, preferences });
 
-        console.log(result)
+        //console.log(result)
 
         expect(result).toEqual({
             binary: false,

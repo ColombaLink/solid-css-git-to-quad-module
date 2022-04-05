@@ -33,11 +33,8 @@ export class gitBinaryToQuadConverter extends TypedRepresentationConverter {
         const data: Buffer = representation.data.read();
 
         let syncTxt = unzipSync(data).toString("utf-8")
-        console.log(syncTxt)
 
-
-        //remove prefix eg: Blob 50/{JSON DATA used}
-
+        let unzip:Buffer= unzipSync(data);
 
         let quad:Quad[];
 
@@ -49,7 +46,7 @@ export class gitBinaryToQuadConverter extends TypedRepresentationConverter {
             quad=GitUtils.blobToQuad(txtNoPrefix)
         }else if (compare===43){
             console.log("Found a Tree")
-            quad=GitUtils.treeToQuad(syncTxt)
+            quad=GitUtils.treeToQuad(unzip)
         }else if (compare===141){
             console.log("Found a Commit")
             quad=GitUtils.commitToQuad(syncTxt)
