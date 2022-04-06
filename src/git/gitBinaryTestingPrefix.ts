@@ -66,7 +66,7 @@ export class gitBinaryTestingPrefix {
         const repo = await Repository.init(".test-folder/", 1);
         const sig = await Signature.default(repo);
 
-       // const event = Buffer.from(JSON.stringify({mesurement: Math.random() *  (100) * ( 1) , unit: 'Celsius'}));
+        //const event = Buffer.from(JSON.stringify({mesurement: Math.random() *  (100) * ( 1) , unit: 'Celsius'}));
         //let hashEvent=await Blob.createFromBuffer(repo, event, event.length)
         let x =await this.initPodWriteTree();
         let y = await this.initPodWriteTree()
@@ -172,6 +172,7 @@ export class gitBinaryTestingPrefix {
         let path = "../../.test-folder/objects/"+prefix+"/"+file.toString()
         let path2="C:\\Users\\timoc\\Desktop\\ssb-crdt-module\\.test-folder\\objects\\"+prefix+"\\"+file.toString().slice(2,file.toString().length);
 
+        //let pathTest= "C:\\Users\\timoc\\Desktop\\ssb-crdt-module\\tmp\\.test-folder\\.git\\objects\\ad\\768acf7f18444f3c02ed2505bdfc28f6cbc096"
         const fs=require('fs')
         let tect =await fs.readFileSync(path2)
         //console.log(tect)

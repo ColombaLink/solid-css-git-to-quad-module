@@ -8,7 +8,7 @@ import {getLoggerFor} from "@solid/community-server";
 describe("A Git Doc Controller GDocController", () => {
     beforeEach(() => {
         // Clean up
-        fs.rmdirSync(".test-folder", {recursive: true})
+        fs.rmSync(".test-folder", {recursive: true})
     })
 
     it("write/ read Blob", async () => {

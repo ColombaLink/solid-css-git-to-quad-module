@@ -32,39 +32,38 @@ export class gitBinaryToQuadConverter extends TypedRepresentationConverter {
 
         // parse identifier/path to an OID
 
-        let pathOfIdentifier=identifier.path;
-
-        let index =pathOfIdentifier.lastIndexOf("/objects/");
-        let oID="";
-        if(index<0){
+        let pathOfIdentifier = identifier.path;
+        let index = pathOfIdentifier.lastIndexOf("/objects/");
+        let oID = "";
+        if (index < 0) {
             console.log("invalid identifier path")
-        }else {
-            oID = pathOfIdentifier.slice(index+9,index+11)+pathOfIdentifier.slice(index+12)
+        } else {
+            oID = pathOfIdentifier.slice(index + 9, index + 11) + pathOfIdentifier.slice(index + 12)
         }
         console.log(oID)
-
 
 
         //since the readable is in object mode the "size" argument we read does not matter
         const data: Buffer = representation.data.read();
         let syncTxt = unzipSync(data).toString("utf-8")
-        let unzip:Buffer= unzipSync(data);
-        let quad:Quad[];
+        let unzip: Buffer = unzipSync(data);
+        let quad: Quad[];
+        console.log(syncTxt)
 
         // figure out the type of Git Object we are dealing with
         let compare = data.readUInt8(2);
-        if(compare===75){
+        if (compare === 75) {
             console.log(" Found a Blob")
-            let txtNoPrefix = syncTxt.slice(8,syncTxt.length);
+            let txtNoPrefix = syncTxt.slice(8, syncTxt.length);
             console.log(txtNoPrefix);
-            quad=GitUtils.blobToQuad(txtNoPrefix,oID)
-        }else if (compare===43){
+            quad = GitUtils.blobToQuad(txtNoPrefix,oID, pathOfIdentifier)
+        } else if (compare === 43) {
             console.log("Found a Tree")
-            quad=GitUtils.treeToQuad(unzip,oID)
-        }else if (compare===141){
+            quad = GitUtils.treeToQuad(unzip, pathOfIdentifier)
+        } else if (compare === 141) {
             console.log("Found a Commit")
-            quad=GitUtils.commitToQuad(syncTxt,oID)
-        }else {
+            quad = GitUtils.commitToQuad(syncTxt, oID,pathOfIdentifier)
+        } else {
             console.log("undefined")
         }
 
@@ -72,4 +71,12 @@ export class gitBinaryToQuadConverter extends TypedRepresentationConverter {
         return new BasicRepresentation(quad, representation.metadata, INTERNAL_QUADS);
 
     }
+
+    /*
+    public async canHandle
+
+        Blob funktioniert nid
+
+
+     */
 }
