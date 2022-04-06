@@ -8,11 +8,11 @@ import {Oid} from "nodegit";
 import {unzipSync} from "zlib";
 export class GitUtils {
 
-    public static blobToQuad(data:string):Quad[]{
+    public static blobToQuad(data:string,id:string):Quad[]{
 
         let toJson= JSON.parse(data); //eigentlich binary data /
         const quads:Quad[] = [];
-        const t= triple(namedNode("Pfad/oid"),namedNode(ldp.LDP.Resource),namedNode(toJson)) //object evt utf8 string
+        const t= triple(namedNode(id),namedNode(ldp.LDP.Resource),namedNode(toJson)) //object evt utf8 string
 
         // Blob LDP non rdf resource
         // falls mir s umwandle bevor em witerschicke genau definiere
@@ -22,7 +22,7 @@ export class GitUtils {
         quads.push(t)
         return quads;
     }
-     public static treeToQuad(data:Buffer):Quad[]{
+     public static treeToQuad(data:Buffer,id:string):Quad[]{
 
          let indexOfBackslash= [];
          let index = 0;
@@ -87,6 +87,7 @@ export class GitUtils {
 
          // ??? Should it be like this: triple( filename , Container , OID (of filename)
          //                             triple( OID of Tree , Container, {filename, OID})
+         // id =oid ??
         for(let i=0;i<oidArray.length;i++){
             const t = triple(namedNode(fileNamesArray[i]), namedNode(ldp.LDP.BasicContainer),namedNode(oidArray[i]))
             quads.push(t)
@@ -95,26 +96,26 @@ export class GitUtils {
      }
 
 
-     public static commitToQuad(data:string){
+     public static commitToQuad(data:string,id:string){
          const quads:Quad[] = [];
 
          //loop over parents
          let parent:string="parent";
-         const p = triple(namedNode("oid"), namedNode(AS.origin),namedNode(parent))
+         const p = triple(namedNode(id), namedNode(AS.origin),namedNode(parent))
          quads.push(p)
 
          let tree:string="oidOfTreeAsString"
-         let t = triple(namedNode("oid"), namedNode(AS.target),namedNode(tree))
+         let t = triple(namedNode(id), namedNode(AS.target),namedNode(tree))
          quads.push(t)
          let author="alice@git.com"
          let committer="Commit-alice@git.com"
          let event="add event"
 
-         const a = triple(namedNode("oid"), namedNode(AS.author),namedNode(author))
+         const a = triple(namedNode(id), namedNode(AS.author),namedNode(author))
          quads.push(a)
-         const c = triple(namedNode("oid"), namedNode(AS.actor),namedNode(committer))
+         const c = triple(namedNode(id), namedNode(AS.actor),namedNode(committer))
          quads.push(c)
-         const m = triple(namedNode("oid"), namedNode(AS.Event),namedNode(event))
+         const m = triple(namedNode(id), namedNode(AS.Event),namedNode(event))
          quads.push(m)
 
          return quads

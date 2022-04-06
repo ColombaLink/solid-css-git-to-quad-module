@@ -33,13 +33,13 @@ export class gitBinaryTestingPrefix {
         let blob = Buffer.from(txt1);
         //console.log(txt1)
         let blobHash=await Blob.createFromBuffer(repo, blob, blob.length)
-        console.log("blobHash "+ blobHash)
+        //console.log("blobHash "+ blobHash)
         let txt2=JSON.stringify({measurement:Math.random()* (10) * (1) * (1), unit: 'Celsius'})
         //console.log(txt2)
         //txt2=JSON.stringify({measurement:0.4655213867682595, unit: 'Celsius'}) // backslash in hash
         let blob2 = Buffer.from(txt2);
         let blobHash2=await Blob.createFromBuffer(repo, blob2, blob2.length)
-        console.log("blobHash2 "+ blobHash2)
+        //console.log("blobHash2 "+ blobHash2)
         // space in hash: {"measurement":618.9727101731705,"unit":"Celsius"}
         // backslah in hash {"measurement":312.65112095170934,"unit":"Celsius"}
 
@@ -51,7 +51,7 @@ export class gitBinaryTestingPrefix {
 
         await secondTreeBuilder.insert("filename2", blobHash2, 33188);
         let secondTreeHash= await secondTreeBuilder.write();
-        console.log("secondTree Hash:  "+ secondTreeHash)
+        //console.log("secondTree Hash:  "+ secondTreeHash)
 
         await currentTreeBuilder.insert("treeName",secondTreeHash,TreeEntry.FILEMODE.TREE)
 

@@ -29,27 +29,41 @@ export class gitBinaryToQuadConverter extends TypedRepresentationConverter {
     public async handle({representation, identifier}: RepresentationConverterArgs): Promise<Representation> {
 
         this.logger.debug("Convert git to quads.")
-        //since the readable is in object mode the "size" we read does not matter
+
+        // parse identifier/path to an OID
+
+        let pathOfIdentifier=identifier.path;
+
+        let index =pathOfIdentifier.lastIndexOf("/objects/");
+        let oID="";
+        if(index<0){
+            console.log("invalid identifier path")
+        }else {
+            oID = pathOfIdentifier.slice(index+9,index+11)+pathOfIdentifier.slice(index+12)
+        }
+        console.log(oID)
+
+
+
+        //since the readable is in object mode the "size" argument we read does not matter
         const data: Buffer = representation.data.read();
-
         let syncTxt = unzipSync(data).toString("utf-8")
-
         let unzip:Buffer= unzipSync(data);
-
         let quad:Quad[];
 
+        // figure out the type of Git Object we are dealing with
         let compare = data.readUInt8(2);
         if(compare===75){
             console.log(" Found a Blob")
             let txtNoPrefix = syncTxt.slice(8,syncTxt.length);
             console.log(txtNoPrefix);
-            quad=GitUtils.blobToQuad(txtNoPrefix)
+            quad=GitUtils.blobToQuad(txtNoPrefix,oID)
         }else if (compare===43){
             console.log("Found a Tree")
-            quad=GitUtils.treeToQuad(unzip)
+            quad=GitUtils.treeToQuad(unzip,oID)
         }else if (compare===141){
             console.log("Found a Commit")
-            quad=GitUtils.commitToQuad(syncTxt)
+            quad=GitUtils.commitToQuad(syncTxt,oID)
         }else {
             console.log("undefined")
         }

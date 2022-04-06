@@ -23,7 +23,7 @@ describe('...', () => {
     })
 
     const converter = new gitBinaryToQuadConverter();
-    const identifier: ResourceIdentifier = { path: 'alice/inhalet/dybli/.....' };
+    const identifier: ResourceIdentifier = { path: 'alice/inhalet/dybli/objects/1e/07383506b250f0433e10985fd21a05a3412471' };
 
     it('converts turtle to quads.', async(): Promise<void> => {
 
@@ -53,6 +53,7 @@ describe('...', () => {
 
         const data = streamifyArray([blobBuffer])
         //console.log("readable  "+ data)
+
         const representation = new BasicRepresentation(data,metadata);
 
         const preferences: RepresentationPreferences = { type: { [INTERNAL_QUADS]: 1 }};
