@@ -6,15 +6,10 @@ import {
     TypedRepresentationConverter
 } from "@solid/community-server";
 import {GitUtils} from "./GitUtils";
-import * as buffer from "buffer";
-import * as util from "util";
-import {Blob} from "nodegit";
 import {Quad} from "rdf-js";
-const {unzip,unzipSync} = require('zlib')
+const {unzipSync} = require('zlib')
 
 
-// @ts-ignore
-//import {Blob, Buffer} from 'buffer';
 
 export class gitBinaryToQuadConverter extends TypedRepresentationConverter {
     protected readonly logger = getLoggerFor(this);
@@ -40,7 +35,6 @@ export class gitBinaryToQuadConverter extends TypedRepresentationConverter {
         } else {
             oID = pathOfIdentifier.slice(index + 9, index + 11) + pathOfIdentifier.slice(index + 12)
         }
-        console.log(oID)
 
 
         //since the readable is in object mode the "size" argument we read does not matter
@@ -75,7 +69,7 @@ export class gitBinaryToQuadConverter extends TypedRepresentationConverter {
     /*
     public async canHandle
 
-        Blob funktioniert nid
+        Blob  nid
 
 
      */

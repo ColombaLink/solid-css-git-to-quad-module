@@ -45,6 +45,7 @@
     {
       "@id": "solid-server:RegexRouterRule",
       "RegexRouterRule:_storeMap": [
+
         {
           "RegexRouterRule:_storeMap_key": "^/home$",
           "RegexRouterRule:_storeMap_value": { "@id": "solid-crdt:YdocStore" }

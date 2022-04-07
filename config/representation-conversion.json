@@ -45,6 +45,9 @@
           "@type": "ChainedConverter",
           "converters": [
             {
+              "@id": "solid-crdt:gitBinaryToQuadConverter"
+            },
+            {
               "@id": "solid-crdt:YjsUpdateToQuadConverter"
             },
             {

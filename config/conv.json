@@ -14,6 +14,12 @@
       "@id": "solid-crdt:YjsUpdateToQuadConverter",
       "@type": "YjsUpdateToQuadConverter"
 
+    },
+    {
+      "comment": "Converts many Git serialization to Quad objects.",
+      "@id": "solid-crdt:gitBinaryToQuadConverter",
+      "@type": "gitBinaryToQuadConverter"
+
     }
   ]
 }

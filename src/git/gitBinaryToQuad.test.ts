@@ -34,12 +34,12 @@ describe('...', () => {
         //let blobBuffer =await gitBinaryTestingPrefix.readFromPodAsBuffer(".test-folder", blobHash)
 
         // Commit test
-        let blobHash = await gitBinaryTestingPrefix.initPodWriteCommit("")
-        let blobBuffer =await gitBinaryTestingPrefix.readFromPodAsBuffer(".test-folder", blobHash)
+        //let blobHash = await gitBinaryTestingPrefix.initPodWriteCommit("")
+        //let blobBuffer =await gitBinaryTestingPrefix.readFromPodAsBuffer(".test-folder", blobHash)
 
         // Tree test
-        //let blobHash = await gitBinaryTestingPrefix.initPodWriteTree()
-        //let blobBuffer =await gitBinaryTestingPrefix.readFromPodAsBuffer(".test-folder", blobHash)
+        let blobHash = await gitBinaryTestingPrefix.initPodWriteTree()
+        let blobBuffer =await gitBinaryTestingPrefix.readFromPodAsBuffer(".test-folder", blobHash)
 
         //console.log(blobBuffer) //here it is readable
         //console.log("hash:  "+blobHash.tostrS())
