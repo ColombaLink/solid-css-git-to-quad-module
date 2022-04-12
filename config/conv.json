@@ -16,7 +16,7 @@
 
     },
     {
-      "comment": "Converts many Git serialization to Quad objects.",
+      "comment": "Converts Git serialization to Quad objects.",
       "@id": "solid-crdt:gitBinaryToQuadConverter",
       "@type": "gitBinaryToQuadConverter"
 

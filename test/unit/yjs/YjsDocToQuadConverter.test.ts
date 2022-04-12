@@ -8,12 +8,12 @@ import {
 } from "@solid/community-server";
 import arrayifyStream = require("arrayify-stream");
 import {namedNode, triple} from "@rdfjs/data-model";
-import {YjsDocToQuadConverter} from "../../../dist/storage/conversion/YjsDocToQuadConverter";
+import {YjsUpdateToQuadConverter} from "../../../src/yjs/storage/conversion/YjsUpdateToQuadConverter";
 import {Doc, encodeStateAsUpdate, Map} from "yjs";
 import streamifyArray = require("streamify-array");
 
 describe('...', () => {
-    const converter = new YjsDocToQuadConverter();
+    const converter = new YjsUpdateToQuadConverter();
     const identifier: ResourceIdentifier = { path: 'path' };
 
     it('converts turtle to quads.', async(): Promise<void> => {

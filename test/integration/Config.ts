@@ -27,6 +27,7 @@ export async function instantiateFromConfig(componentUrl: string, configPaths: s
 }
 
 export function getTestConfigPath(configFile: string): string {
+  console.log("test/integration/Config.ts "+__dirname+"\\config\\"+configFile)
   return joinFilePath(__dirname, 'config', configFile);
 }
 
@@ -48,5 +49,6 @@ export function getDefaultVariables(port: number, baseUrl?: string): Record<stri
     'urn:solid-server:default:variable:port': port,
     'urn:solid-server:default:variable:loggingLevel': 'off',
     'urn:solid-server:default:variable:showStackTrace': true,
+    'urn:solid-server:default:variable:rootFilePath': '../../' //not sure where it should be
   };
 }

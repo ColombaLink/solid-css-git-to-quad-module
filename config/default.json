@@ -25,7 +25,7 @@
     "files-scs:config/ldp/metadata-parser/default.json",
     "files-scs:config/ldp/metadata-writer/default.json",
     "files-scs:config/ldp/permissions/acl.json",
-    "files-scs:config/storage/backend/memory.json",
+    "files-scs:config/storage/backend/file.json",
     "files-scs:config/storage/key-value/resource-store.json",
     "files-scs:config/storage/middleware/default.json",
     "files-scs:config/util/auxiliary/acl.json",
@@ -33,6 +33,8 @@
     "files-scs:config/util/logging/winston.json",
     "files-scs:config/util/resource-locker/memory.json",
     "files-scs:config/util/variables/default.json",
+
+    "files-scs:config/file.json",
 
     "files-cm:config/representation-conversion.json",
     "files-cm:config/util/identifiers/suffix.json"

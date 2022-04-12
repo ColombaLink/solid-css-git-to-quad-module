@@ -28,7 +28,7 @@ export class gitBinaryToQuadConverter extends TypedRepresentationConverter {
         // parse identifier/path to an OID
 
         let pathOfIdentifier = identifier.path;
-        let index = pathOfIdentifier.lastIndexOf("/objects/");
+        let index = pathOfIdentifier.lastIndexOf("/objects/"); // might not work if it is windows encoded path
         let oID = "";
         if (index < 0) {
             console.log("invalid identifier path")
@@ -58,10 +58,10 @@ export class gitBinaryToQuadConverter extends TypedRepresentationConverter {
             console.log("Found a Commit")
             quad = GitUtils.commitToQuad(syncTxt, oID,pathOfIdentifier)
         } else {
+            quad=[];
             console.log("undefined")
         }
 
-        // @ts-ignore
         return new BasicRepresentation(quad, representation.metadata, INTERNAL_QUADS);
 
     }
