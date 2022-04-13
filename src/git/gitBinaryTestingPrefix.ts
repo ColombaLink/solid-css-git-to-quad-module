@@ -1,18 +1,4 @@
-import {
-    BasicRepresentation,
-    getLoggerFor, INTERNAL_QUADS,
-    Representation,
-    RepresentationConverterArgs,
-    TypedRepresentationConverter
-} from "@solid/community-server";
-import {Blob, Commit, Oid, Repository, Revwalk, Signature, Tree, Treebuilder, TreeEntry} from "nodegit"
-import * as url from "url";
-import * as buffer from "buffer";
-import fetch from "node-fetch";
-import * as URL from "url";
-import {open} from "fs-extra";
-import fs from "fs";
-import * as zlib from "zlib";
+import {Blob, Commit, Oid, Repository, Signature, Treebuilder, TreeEntry} from "nodegit"
 
 export class gitBinaryTestingPrefix {
 

@@ -8,7 +8,7 @@ import {
 } from "@solid/community-server";
 import arrayifyStream = require("arrayify-stream");
 import {namedNode, triple} from "@rdfjs/data-model";
-import {gitBinaryToQuadConverter} from "./gitBinaryToQuadConverter";
+import {GitBinaryToQuadConverter} from "./GitBinaryToQuadConverter";
 import {Doc, encodeStateAsUpdate, Map} from "yjs";
 import streamifyArray = require("streamify-array");
 import {gitBinaryTestingPrefix} from "./gitBinaryTestingPrefix";
@@ -22,7 +22,7 @@ describe('...', () => {
         fs.rmdirSync(".test-folder", {recursive: true})
     })
 
-    const converter = new gitBinaryToQuadConverter();
+    const converter = new GitBinaryToQuadConverter();
     const identifier: ResourceIdentifier = { path: 'alice/inhalet/dybli/objects/1e/07383506b250f0433e10985fd21a05a3412471' };
 
     it('converts turtle to quads.', async(): Promise<void> => {

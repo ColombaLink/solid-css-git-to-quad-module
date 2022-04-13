@@ -51,7 +51,6 @@ export class GitUtils {
             let blobSlice = data.slice(indexi + 1, indexi + 21)
             oidArray.push(blobSlice.toString('hex'))
         }
-        console.log(oidArray)
 
         let syncTxt = data.toString("utf-8")
 
@@ -84,14 +83,8 @@ export class GitUtils {
             modeArray.push(mode)
 
         }
-        console.log(fileNamesArray)
-
-        console.log(modeArray)
 
         const quads: Quad[] = [];
-
-
-
 
         for (let i = 0; i < oidArray.length; i++) {
             if (modeArray[i] === "0644") {

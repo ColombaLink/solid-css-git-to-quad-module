@@ -11,7 +11,7 @@ const {unzipSync} = require('zlib')
 
 
 
-export class gitBinaryToQuadConverter extends TypedRepresentationConverter {
+export class GitBinaryToQuadConverter extends TypedRepresentationConverter {
     protected readonly logger = getLoggerFor(this);
 
     public constructor() {

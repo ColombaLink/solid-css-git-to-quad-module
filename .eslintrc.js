@@ -39,7 +39,7 @@ module.exports = {
   },
   overrides: [
     {
-      files: '*.js',
+      files: ['*.js'],
       parser: 'espree',
     },
   ],
