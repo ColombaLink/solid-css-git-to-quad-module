@@ -23,18 +23,12 @@ describe('A chained converter ', (): void => {
 
     it('gitConverterTesting', async (): Promise<void> => {
 
-
         let path = ".test-folder/"
-
         let arrayOfIds = await GitObjectFactory.createBasicGitObjects(path)
 
         // define which object we want here [0][x] =blob [1][x]=tree [2][x] = commit
         let stringOfIDPrefix = arrayOfIds[0][0].toString()
-
         let pathToGit = path + "/objects/" + stringOfIDPrefix.slice(0, 2) + "/" + stringOfIDPrefix.slice(2);
-        console.log(pathToGit)
-
-        //let pathToGit = "C:/Users/timoc/Desktop/gitTestFolder/.git/objects/47/6741016695e696bb591e12c0d069268b801636";
 
         let read = await fs.readFileSync(pathToGit);
 

@@ -42,14 +42,13 @@ export class GitBinaryToQuadConverter extends TypedRepresentationConverter {
         let syncTxt = unzipSync(data).toString("utf-8")
         let unzip: Buffer = unzipSync(data);
         let quad: Quad[];
-        console.log(syncTxt)
+        //console.log(syncTxt)
 
         // figure out the type of Git Object we are dealing with
         let compare = data.readUInt8(2);
         if (compare === 75) {
             console.log(" Found a Blob")
             let txtNoPrefix = syncTxt.slice(8, syncTxt.length);
-            console.log(txtNoPrefix);
             quad = GitUtils.blobToQuad(txtNoPrefix,oID, pathOfIdentifier)
         } else if (compare === 43) {
             console.log("Found a Tree")

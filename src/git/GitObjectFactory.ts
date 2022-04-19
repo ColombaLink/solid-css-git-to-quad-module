@@ -12,7 +12,13 @@ export class GitObjectFactory{
 
     public static async createBasicGitObjects(path:string){
 
-        fs.rmSync(".test-folder", {recursive: true})
+        try {
+            fs.rmSync(".test-folder/", {recursive: true})
+        }
+        catch (error){
+            console.log(error)
+        }
+
         const repo = await Repository.init(path, 1);
         const sig = await Signature.default(repo);
         let x =await this.createTree(repo); //returns array of Oid first two are Blobs 3. inner tree 4. outer Tree

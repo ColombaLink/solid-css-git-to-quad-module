@@ -20,13 +20,12 @@
     "files-scs:config/identity/pod/static.json",
     "files-scs:config/identity/registration/enabled.json",
     "files-scs:config/ldp/authentication/dpop-bearer.json",
-    "files-scs:config/ldp/authorization/webacl.json",
+    "files-scs:config/ldp/authorization/allow-all.json",
     "files-scs:config/ldp/handler/default.json",
     "files-scs:config/ldp/metadata-parser/default.json",
     "files-scs:config/ldp/metadata-writer/default.json",
     "files-scs:config/ldp/permissions/acl.json",
     "files-scs:config/storage/backend/file.json",
-    "files-scs:config/storage/key-value/resource-store.json",
     "files-scs:config/storage/key-value/resource-store.json",
     "files-scs:config/storage/middleware/default.json",
     "files-scs:config/util/auxiliary/acl.json",
@@ -36,6 +35,7 @@
     "files-scs:config/util/representation-conversion/default.json",
     "files-scs:config/util/resource-locker/memory.json",
     "files-scs:config/util/variables/default.json"
+
   ],
   "@graph": [
     {
