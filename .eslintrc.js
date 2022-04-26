@@ -24,6 +24,10 @@ module.exports = {
     '@typescript-eslint/no-unnecessary-condition': 'off',
     '@typescript-eslint/space-before-function-paren': ['error', 'never'],
     '@typescript-eslint/consistent-type-definitions': 'off',
+    '@typescript-eslint/no-extraneous-class': 'off',
+
+    'no-constant-condition': 'off',
+
     'array-bracket-spacing': ['error', 'never'],
     'class-methods-use-this': 'off',
     'comma-dangle': ['error', 'always-multiline'],
