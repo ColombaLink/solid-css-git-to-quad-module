@@ -20,8 +20,7 @@
       "base": { "@id": "urn:solid-server:default:variable:baseUrl" },
       "rootFilepath": { "@id": "urn:solid-server:default:variable:rootFilePath" },
       "customTypes":  {
-        "key": "yjsu",
-        "value": "application/yjs-update"
+        "git":"application/git"
       }}
   ]
 }

@@ -19,8 +19,6 @@
   ],
   "@graph": [
 
-
-
     {
       "comment": "Handles data conversion when required.",
       "@id": "urn:solid-server:default:RepresentationConverter",

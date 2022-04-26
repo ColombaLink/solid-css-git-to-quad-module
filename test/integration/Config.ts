@@ -52,3 +52,6 @@ export function getDefaultVariables(port: number, baseUrl?: string): Record<stri
     'urn:solid-server:default:variable:rootFilePath': '../../' //not sure where it should be
   };
 }
+
+export default class Config_1 {
+}
