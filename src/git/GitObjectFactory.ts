@@ -1,7 +1,6 @@
 import fs from 'fs';
-import type { Commit, Oid } from 'nodegit';
 import { Blob, Repository, Signature, Treebuilder, TreeEntry } from 'nodegit';
-import { getLoggerFor } from '@solid/community-server';
+import type { Commit, Oid } from 'nodegit';
 
 export class GitObjectFactory {
   /**
@@ -12,18 +11,26 @@ export class GitObjectFactory {
      */
 
   public static async createBasicGitObjects(path: string): Promise<any> {
-    const logger = getLoggerFor(this);
+    // Const logger = getLoggerFor(this);
+    // Try {
+    // fs.rmdir('./test-folder', {
+    //     recursive: true,
+    // }, (): void => {
+    //     logger.debug('delting directory');
+    // });
+    // } catch {
+    // logger.debug('error while delting director');
+    // }
+
     try {
-      fs.rmdir('./test-folder', {
-        recursive: true,
-      }, (): void => {
-        logger.debug('delting directory');
-      });
+      fs.rmSync('.test-folder/', { recursive: true });
     } catch {
-      logger.debug('error while delting director');
+      // Console.log(ex);
     }
 
     const repo = await Repository.init(path, 1);
+    await Signature.default(repo);
+
     const x = await this.createTree(repo);
     // Returns array of Oid first two are Blobs 3. inner tree 4. outer Tree
     const y = await this.createTree(repo);
@@ -55,10 +62,11 @@ export class GitObjectFactory {
     return gitObjectOidArray;
   }
 
-  public static async createTree(repo: Repository): Promise<any> {
+  public static async createTree(repo: Repository) {
     // Fs.rmSync(".test-folder/")
 
     // const repo = await Repository.init(".test-folder/", 1);
+    await Signature.default(repo);
 
     const txt1 = JSON.stringify({ measurement: Math.random() * 9 * 1 * 1, unit: 'Celsius' });
     const blob = Buffer.from(txt1);
@@ -67,9 +75,9 @@ export class GitObjectFactory {
     const blob2 = Buffer.from(txt2);
     const blobHash2 = await Blob.createFromBuffer(repo, blob2, blob2.length);
 
-    const secondTreeBuilder = await Treebuilder.create(repo);
+    const secondTreeBuilder = await Treebuilder.create(repo,undefined);
 
-    const currentTreeBuilder = await Treebuilder.create(repo);
+    const currentTreeBuilder = await Treebuilder.create(repo,undefined);
     await currentTreeBuilder.insert('filename', blobHash, TreeEntry.FILEMODE.BLOB);
 
     await secondTreeBuilder.insert('filename2', blobHash2, 33_188);

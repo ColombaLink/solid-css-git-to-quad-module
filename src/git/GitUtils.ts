@@ -1,11 +1,11 @@
 import type { Quad } from 'rdf-js';
 import { namedNode, triple } from '@rdfjs/data-model';
-import ldp, { AS } from '@inrupt/vocab-common-rdf';
+import { AS, LDP } from '@inrupt/vocab-common-rdf';
 
 export class GitUtils {
   public static blobToQuad(data: string, oid: string, uri: string): Quad[] {
     const quads: Quad[] = [];
-    const trip = triple(namedNode(oid), namedNode(ldp.LDP.NonRDFSource), namedNode(uri));
+    const trip = triple(namedNode(oid), namedNode(LDP.NonRDFSource), namedNode(uri));
 
     quads.push(trip);
     return quads;
@@ -75,11 +75,11 @@ export class GitUtils {
     for (const [i, element] of oidArray.entries()) {
       if (modeArray[i] === '0644') {
         const pathToNewTree = `${path.slice(0, path.indexOf('objects') + 8) + element.slice(0, 2)}/${element.slice(2)}`;
-        const tr = triple(namedNode(fileNamesArray[i]), namedNode(ldp.LDP.NonRDFSource), namedNode(pathToNewTree));
+        const tr = triple(namedNode(fileNamesArray[i]), namedNode(LDP.NonRDFSource), namedNode(pathToNewTree));
         quads.push(tr);
       } else if (modeArray[i] === '0000') {
         const pathToNewTree = `${path.slice(0, path.indexOf('objects') + 8) + element.slice(0, 2)}/${element.slice(2)}`;
-        const tr = triple(namedNode(fileNamesArray[i]), namedNode(ldp.LDP.BasicContainer), namedNode(pathToNewTree));
+        const tr = triple(namedNode(fileNamesArray[i]), namedNode(LDP.BasicContainer), namedNode(pathToNewTree));
         quads.push(tr);
       } else {
         // Console.log('udefined element in tree');
