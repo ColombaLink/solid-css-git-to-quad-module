@@ -65,10 +65,10 @@
     "yjs": "^13.5.13"
   },
   "peerDependencies": {
-    "@solid/community-server": "^0.8.1"
+    "@solid/community-server": "4.0.0"
   },
   "devDependencies": {
-    "@solid/community-server": "^1.1.0",
+    "@solid/community-server": "4.0.0",
     "@tsconfig/node14": "^1.0.0",
     "@types/fs-extra": "^9.0.13",
     "@types/jest": "^27.0.1",

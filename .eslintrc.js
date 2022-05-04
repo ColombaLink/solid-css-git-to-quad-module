@@ -40,6 +40,8 @@ module.exports = {
     'quote-props': ['error', 'consistent-as-needed'],
     'sort-imports': 'off',
     'strict': 'off',
+    'unicorn/import-style': 'off',
+    'prefer-named-capture-group': 'off'
   },
   overrides: [
     {

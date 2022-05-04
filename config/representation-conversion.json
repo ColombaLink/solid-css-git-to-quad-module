@@ -13,9 +13,7 @@
     "files-scs:config/util/representation-conversion/converters/errors.json",
     "files-scs:config/util/representation-conversion/converters/markdown.json",
     "files-scs:config/util/representation-conversion/converters/quad-to-rdf.json",
-    "files-scs:config/util/representation-conversion/converters/rdf-to-quad.json",
-
-    "files-cm:config/conv.json"
+    "files-scs:config/util/representation-conversion/converters/rdf-to-quad.json"
   ],
   "@graph": [
 
@@ -43,12 +41,6 @@
           "@type": "ChainedConverter",
           "converters": [
             {
-              "@id": "solid-crdt:GitBinaryToQuadConverter"
-            },
-            {
-              "@id": "solid-crdt:YjsUpdateToQuadConverter"
-            },
-            {
               "@id": "urn:solid-server:default:RdfToQuadConverter"
             },
             {
@@ -62,9 +54,6 @@
             },
             {
               "@id": "urn:solid-server:default:ErrorToTemplateConverter"
-            },
-            {
-              "@id": "urn:solid-server:default:MarkdownToHtmlConverter"
             }
           ]
         }
