@@ -17,7 +17,7 @@ import { getDefaultVariables, getTestConfigPath, instantiateFromConfig } from '.
 import streamifyArray from 'streamify-array';
 
 Object.defineProperty(exports, '__esModule', { value: true });
-const port = 3_001;
+const port = 3001;
 const baseUrl = `http://localhost:${port}/`;
 describe('Test', () => {
   let app: any;
@@ -38,18 +38,20 @@ describe('Test', () => {
 
     const read = await fs.readFileSync(pathToGit);
 
-    const put1 = await fetch(`${baseUrl}git/o/12345.git`, {
+    const put1 = await fetch(`${baseUrl}git/o/122.git`, {
       method: 'PUT',
       headers: {
-        'content-type': 'application/gzip',
+        'content-type': 'application/git'
       },
       body: read,
     });
 
     console.log(put1.status);
 
-    const getRes0 = await fetch(`${baseUrl}git/o/12345.git`, {
+    const getRes0 = await fetch(`${baseUrl}git/o/122.git`, {
       method: 'GET',
+        headers:{
+          'accept': 'application/git'}
     });
     console.log(getRes0.status);
 

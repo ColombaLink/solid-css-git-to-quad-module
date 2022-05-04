@@ -23,6 +23,7 @@ export class GitObjectFactory {
     // }
 
     try {
+      // eslint-disable-next-line no-sync
       fs.rmSync('.test-folder/', { recursive: true });
     } catch {
       // Console.log(ex);
@@ -62,6 +63,7 @@ export class GitObjectFactory {
     return gitObjectOidArray;
   }
 
+  // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
   public static async createTree(repo: Repository) {
     // Fs.rmSync(".test-folder/")
 
@@ -75,9 +77,9 @@ export class GitObjectFactory {
     const blob2 = Buffer.from(txt2);
     const blobHash2 = await Blob.createFromBuffer(repo, blob2, blob2.length);
 
-    const secondTreeBuilder = await Treebuilder.create(repo,undefined);
+    const secondTreeBuilder = await Treebuilder.create(repo);
 
-    const currentTreeBuilder = await Treebuilder.create(repo,undefined);
+    const currentTreeBuilder = await Treebuilder.create(repo);
     await currentTreeBuilder.insert('filename', blobHash, TreeEntry.FILEMODE.BLOB);
 
     await secondTreeBuilder.insert('filename2', blobHash2, 33_188);
