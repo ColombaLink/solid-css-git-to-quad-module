@@ -6,7 +6,7 @@ import {
   RdfToQuadConverter,
   RepresentationMetadata,
 } from '@solid/community-server';
-import { GitBinaryToQuadConverter } from '../../dist';
+import { GitBinaryToQuadConverter } from '../../src';
 import fs from 'fs';
 import type { Readable } from 'stream';
 import { GitObjectFactory } from '../../src/git/GitObjectFactory';
