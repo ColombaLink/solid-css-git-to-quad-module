@@ -1,7 +1,6 @@
 import fs from 'fs';
 import {
   RegexBasedExtensionMapper,
-  RegexBasedExtensionMapperFactory
 } from "../../src/storage/mapping/RegexBasedExtensionMapper";
 import {
   BadRequestHttpError,
@@ -16,7 +15,9 @@ jest.mock('fs');
 describe('An RegexBasedMapper', (): void => {
   const base = 'http://test.com/';
   const rootFilepath = 'uploads/';
-  const mapper = new RegexBasedExtensionMapper(base, rootFilepath);
+  const regex = /\/\w\w\/\w{38}$/gmu;
+  const contentTypeOfRegex= "application/git"
+  const mapper = new RegexBasedExtensionMapper(base, rootFilepath,regex,contentTypeOfRegex);
   let fsPromises: Record<string, jest.Mock>;
 
   beforeEach(async(): Promise<void> => {
@@ -135,7 +136,7 @@ describe('An RegexBasedMapper', (): void => {
     });
 
     it('supports custom types.', async(): Promise<void> => {
-      const customMapper = new RegexBasedExtensionMapper(base, rootFilepath, { cstm: 'text/custom' });
+      const customMapper = new RegexBasedExtensionMapper(base, rootFilepath,regex,contentTypeOfRegex, { cstm: 'text/custom' });
       await expect(customMapper.mapUrlToFilePath({ path: `${base}test.cstm` }, false))
           .resolves.toEqual({
             identifier: { path: `${base}test.cstm` },
@@ -146,7 +147,7 @@ describe('An RegexBasedMapper', (): void => {
     });
 
     it('supports custom extensions.', async(): Promise<void> => {
-      const customMapper = new RegexBasedExtensionMapper(base, rootFilepath, { cstm: 'text/custom' });
+      const customMapper = new RegexBasedExtensionMapper(base, rootFilepath,regex,contentTypeOfRegex,{ cstm: 'text/custom' });
       await expect(customMapper.mapUrlToFilePath({ path: `${base}test` }, false, 'text/custom'))
           .resolves.toEqual({
             identifier: { path: `${base}test` },
@@ -207,7 +208,7 @@ describe('An RegexBasedMapper', (): void => {
     });
 
     it('supports custom extensions.', async(): Promise<void> => {
-      const customMapper = new RegexBasedExtensionMapper(base, rootFilepath, { cstm: 'text/custom' });
+      const customMapper = new RegexBasedExtensionMapper(base, rootFilepath,regex,contentTypeOfRegex, { cstm: 'text/custom' });
       await expect(customMapper.mapFilePathToUrl(`${rootFilepath}test$.cstm`, false))
           .resolves.toEqual({
             identifier: { path: `${base}test` },
@@ -219,23 +220,15 @@ describe('An RegexBasedMapper', (): void => {
   });
 
   it('map regex suffix to content type', async(): Promise<void> => {
-    const customMapper = new RegexBasedExtensionMapper(base, rootFilepath);
-    await expect(customMapper.mapUrlToFilePath({ path: `${base}a/resource/12/3` }, false))
+    const customMapper = new RegexBasedExtensionMapper(base, rootFilepath,regex,contentTypeOfRegex);
+    await expect(customMapper.mapUrlToFilePath({ path: `${base}a/resource/12/97fc1e89a6b174c7a5f4a48001f78789a89f4c` }, false))
         .resolves.toEqual({
-          identifier: { path: `${base}a/resource/12/3` },
-          filePath: `${rootFilepath}a/resource/12/3`,
-          contentType: 'regex/suffix-type',
+          identifier: { path: `${base}a/resource/12/97fc1e89a6b174c7a5f4a48001f78789a89f4c` },
+          filePath: `${rootFilepath}a/resource/12/97fc1e89a6b174c7a5f4a48001f78789a89f4c`,
+          contentType: 'application/git',
           isMetadata: false,
         });
   })
-
-  describe('An RegexBasedMapperFactory', (): void => {
-    const factory = new RegexBasedExtensionMapperFactory();
-
-    it('creates an RegexBasedMapper.', async(): Promise<void> => {
-      await expect(factory.create('base', 'filePath')).resolves.toBeInstanceOf(RegexBasedExtensionMapper);
-    });
-  });
 
 
 });
