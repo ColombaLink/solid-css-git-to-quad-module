@@ -1,9 +1,9 @@
 {
   "@context": [
-    "https://linkedsoftwaredependencies.org/bundles/npm/crdt-module/^1.0.0/components/context.jsonld",
+    "https://linkedsoftwaredependencies.org/bundles/npm/git-module/^1.0.0/components/context.jsonld",
     "https://linkedsoftwaredependencies.org/bundles/npm/@solid/community-server/^4.0.0/components/context.jsonld",
     {
-      "solid-crdt": "urn:solid-crdt:default:",
+      "solid-git": "urn:solid-git:default:",
       "solid-server": "urn:solid-server:default:"
     }
   ],
@@ -15,7 +15,7 @@
     "files-scs:config/util/representation-conversion/converters/quad-to-rdf.json",
     "files-scs:config/util/representation-conversion/converters/rdf-to-quad.json",
 
-    "files-cm:config/conv.json"
+    "files-gm:config/conv.json"
   ],
   "@graph": [
 
@@ -39,7 +39,7 @@
           "@type": "ChainedConverter",
           "converters": [
             {
-              "@id": "solid-crdt:GitToQuadConverter"
+              "@id": "solid-git:GitToQuadConverter"
             },
             {
               "@id": "urn:solid-server:default:RdfToQuadConverter"
