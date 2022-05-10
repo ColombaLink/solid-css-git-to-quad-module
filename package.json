@@ -11,8 +11,8 @@
   ],
   "license": "MIT",
   "author": " <your@email.com> (https://optional.link/to-your-website/)",
-  "main": "./dist/index.js",
-  "types": "./dist/index.d.ts",
+  "main": "./dist/src/index.js",
+  "types": "./dist/src/index.d.ts",
   "repository": "git@github.com:GitHubUserName/RepositoryName.git",
   "bugs": {
     "url": "https://github.com/GitHubUserName/RepositoryName/issues"
@@ -65,10 +65,10 @@
     "yjs": "^13.5.13"
   },
   "peerDependencies": {
-    "@solid/community-server": "^0.8.1"
+    "@solid/community-server": "^4.0.0"
   },
   "devDependencies": {
-    "@solid/community-server": "^1.1.0",
+    "@solid/community-server": "^4.0.0",
     "@tsconfig/node14": "^1.0.0",
     "@types/fs-extra": "^9.0.13",
     "@types/jest": "^27.0.1",
@@ -76,7 +76,7 @@
     "@types/ssb-keys": "^7.2.0",
     "@typescript-eslint/eslint-plugin": "^4.11.1",
     "@typescript-eslint/parser": "^4.11.1",
-    "componentsjs-generator": "^2.0.0",
+    "componentsjs-generator": "^2.6.1",
     "eslint": "^7.16.0",
     "eslint-config-es": "^3.26.13",
     "eslint-plugin-import": "^2.22.1",

@@ -12,7 +12,7 @@ import {
   RepresentationMetadata,
 } from '@solid/community-server';
 import type { Readable } from 'stream';
-import { GitBinaryToQuadConverter } from '../../src';
+import { GitToQuadConverter } from '../../src';
 import { getDefaultVariables, getTestConfigPath, instantiateFromConfig } from './Config';
 import streamifyArray from 'streamify-array';
 
@@ -30,25 +30,37 @@ describe('Test', () => {
   });
   it('simple int test', async() => {
     const path = '.test-folder';
-    const arrayOfIds = await GitObjectFactory.createBasicGitObjects(path);
+   // const arrayOfIds = await GitObjectFactory.createBasicGitObjects(path);
 
     // Define which object we want here [0][x] =blob [1][x]=tree [2][x] = commit
-    const stringOfIDPrefix = arrayOfIds[0][0].toString();
-    const pathToGit = `${path}/objects/${stringOfIDPrefix.slice(0, 2)}/${stringOfIDPrefix.slice(2)}`;
+   // const stringOfIDPrefix = arrayOfIds[0][0].toString();
+  //  const pathToGit = `${path}/objects/${stringOfIDPrefix.slice(0, 2)}/${stringOfIDPrefix.slice(2)}`;
 
-    const read = await fs.readFileSync(pathToGit);
+      const pathToGit ="ptg"
 
-    const put1 = await fetch(`${baseUrl}git/o/122.git`, {
-      method: 'PUT',
-      headers: {
-        'content-type': 'application/git'
-      },
-      body: read,
-    });
+    //  const read = await fs.readFileSync(pathToGit);
+      const read = "blub"
 
-    console.log(put1.status);
 
-    const getRes0 = await fetch(`${baseUrl}git/o/122.git`, {
+      try {
+
+
+          const put1 = await fetch(`${baseUrl}ax`, {
+              method: 'PUT',
+              headers: {
+                  'content-type': 'application/json'
+              },
+              body: "bluiiie",
+          });
+
+          console.log(put1.status);
+      }catch (error){
+          console.log(error)
+      }
+
+
+
+    const getRes0 = await fetch("http://localhost:3001/abc", {
       method: 'GET',
         headers:{
           'accept': 'application/git'}
@@ -66,7 +78,7 @@ describe('Test', () => {
     // Give Data to Converter
     const converter = new ChainedConverter([
       new RdfToQuadConverter(),
-      new GitBinaryToQuadConverter(),
+      new GitToQuadConverter(),
     ]);
 
     const metadata = new RepresentationMetadata('application/git'); // Wie findet me das use
@@ -81,6 +93,7 @@ describe('Test', () => {
     const something: Readable = result.data;
     const readSomething = await something.read(20);
     console.log(readSomething);
+    expect(readSomething).toBeTruthy();
   });
 });
 // # sourceMappingURL=Yjs.test.js.map

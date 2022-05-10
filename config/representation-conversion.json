@@ -1,7 +1,7 @@
 {
   "@context": [
     "https://linkedsoftwaredependencies.org/bundles/npm/crdt-module/^1.0.0/components/context.jsonld",
-    "https://linkedsoftwaredependencies.org/bundles/npm/@solid/community-server/^1.0.0/components/context.jsonld",
+    "https://linkedsoftwaredependencies.org/bundles/npm/@solid/community-server/^4.0.0/components/context.jsonld",
     {
       "solid-crdt": "urn:solid-crdt:default:",
       "solid-server": "urn:solid-server:default:"
@@ -31,10 +31,6 @@
           "@id": "urn:solid-server:default:MarkdownToHtmlConverter"
         },
         {
-          "@type": "IfNeededConverter",
-          "comment": "Only continue converting if the requester cannot accept the available content type"
-        },
-        {
           "@id": "urn:solid-server:default:ContentTypeReplacer"
         },
         {
@@ -43,10 +39,7 @@
           "@type": "ChainedConverter",
           "converters": [
             {
-              "@id": "solid-crdt:GitBinaryToQuadConverter"
-            },
-            {
-              "@id": "solid-crdt:YjsUpdateToQuadConverter"
+              "@id": "solid-crdt:GitToQuadConverter"
             },
             {
               "@id": "urn:solid-server:default:RdfToQuadConverter"
@@ -68,6 +61,15 @@
             }
           ]
         }
+      ]
+    },
+    {
+      "comment": "Converts either to a default UI or to a representation.",
+      "@id": "urn:solid-server:default:UiEnabledConverter",
+      "@type": "WaterfallHandler",
+      "handlers": [
+        { "@id": "urn:solid-server:default:DefaultUiConverter" },
+        { "@id": "urn:solid-server:default:RepresentationConverter" }
       ]
     }
   ]

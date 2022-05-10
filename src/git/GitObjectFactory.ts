@@ -1,6 +1,8 @@
-import fs from 'fs';
 import { Blob, Repository, Signature, Treebuilder, TreeEntry } from 'nodegit';
 import type { Commit, Oid } from 'nodegit';
+import fs from 'fs';
+
+// Import {rmSync} from "fs-extra";
 
 export class GitObjectFactory {
   /**
@@ -9,25 +11,13 @@ export class GitObjectFactory {
      *
      * returns [][] of Oid where [0][x] =blob [1][x]=tree [2][x] = commit
      */
-
-  public static async createBasicGitObjects(path: string): Promise<any> {
-    // Const logger = getLoggerFor(this);
-    // Try {
-    // fs.rmdir('./test-folder', {
-    //     recursive: true,
-    // }, (): void => {
-    //     logger.debug('delting directory');
-    // });
-    // } catch {
-    // logger.debug('error while delting director');
-    // }
-
+  // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
+  public static async createBasicGitObjects(path: string) {
     try {
       // eslint-disable-next-line no-sync
       fs.rmSync('.test-folder/', { recursive: true });
-    } catch {
-      // Console.log(ex);
-    }
+      // eslint-disable-next-line no-empty
+    } catch {}
 
     const repo = await Repository.init(path, 1);
     await Signature.default(repo);
@@ -65,9 +55,6 @@ export class GitObjectFactory {
 
   // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
   public static async createTree(repo: Repository) {
-    // Fs.rmSync(".test-folder/")
-
-    // const repo = await Repository.init(".test-folder/", 1);
     await Signature.default(repo);
 
     const txt1 = JSON.stringify({ measurement: Math.random() * 9 * 1 * 1, unit: 'Celsius' });
@@ -77,9 +64,10 @@ export class GitObjectFactory {
     const blob2 = Buffer.from(txt2);
     const blobHash2 = await Blob.createFromBuffer(repo, blob2, blob2.length);
 
-    const secondTreeBuilder = await Treebuilder.create(repo);
-
-    const currentTreeBuilder = await Treebuilder.create(repo);
+    // eslint-disable-next-line unicorn/no-useless-undefined
+    const secondTreeBuilder = await Treebuilder.create(repo, undefined);
+    // eslint-disable-next-line unicorn/no-useless-undefined
+    const currentTreeBuilder = await Treebuilder.create(repo, undefined);
     await currentTreeBuilder.insert('filename', blobHash, TreeEntry.FILEMODE.BLOB);
 
     await secondTreeBuilder.insert('filename2', blobHash2, 33_188);

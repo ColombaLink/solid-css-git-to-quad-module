@@ -6,7 +6,7 @@ import {
   RdfToQuadConverter,
   RepresentationMetadata,
 } from '@solid/community-server';
-import { GitBinaryToQuadConverter } from '../../src';
+import { GitToQuadConverter } from '../../src';
 import fs from 'fs';
 import type { Readable } from 'stream';
 import { GitObjectFactory } from '../../src/git/GitObjectFactory';
@@ -15,7 +15,7 @@ import streamifyArray from 'streamify-array';
 describe('A chained converter ', (): void => {
   const converter = new ChainedConverter([
     new RdfToQuadConverter(),
-    new GitBinaryToQuadConverter(),
+    new GitToQuadConverter(),
   ]);
 
   it('gitConverterTesting', async(): Promise<void> => {
@@ -28,7 +28,7 @@ describe('A chained converter ', (): void => {
 
     const read = await fs.readFileSync(pathToGit);
 
-    const metadata = new RepresentationMetadata('git/objects');
+    const metadata = new RepresentationMetadata('application/git');
     const identifier: ResourceIdentifier = { path: pathToGit };
 
     // Convert Buffer to Readable

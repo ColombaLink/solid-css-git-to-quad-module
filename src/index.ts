@@ -1,2 +1,2 @@
 // Storage
-export * from './git/GitBinaryToQuadConverter';
+export * from './git/GitToQuadConverter';

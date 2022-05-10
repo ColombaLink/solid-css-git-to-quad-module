@@ -1,22 +1,21 @@
 import type { Representation,
   RepresentationConverterArgs } from '@solid/community-server';
 import {
+  BaseTypedRepresentationConverter,
   BasicRepresentation,
   getLoggerFor, INTERNAL_QUADS,
-  TypedRepresentationConverter,
+
 } from '@solid/community-server';
 import { GitUtils } from './GitUtils';
 import type { Quad } from 'rdf-js';
 import { unzipSync } from 'zlib';
+import { APPLICATION_GIT } from '../util/ContentType';
 
-export class GitBinaryToQuadConverter extends TypedRepresentationConverter {
+export class GitToQuadConverter extends BaseTypedRepresentationConverter {
   protected readonly logger = getLoggerFor(this);
 
   public constructor() {
-    super(
-      { 'application/git': 1 },
-      { 'internal/quads': 1 },
-    );
+    super(APPLICATION_GIT, INTERNAL_QUADS);
   }
 
   public async handle({ representation, identifier }: RepresentationConverterArgs): Promise<Representation> {

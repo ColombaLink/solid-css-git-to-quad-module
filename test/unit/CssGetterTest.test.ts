@@ -6,7 +6,7 @@ import {
   RdfToQuadConverter,
   RepresentationMetadata,
 } from '@solid/community-server';
-import { GitBinaryToQuadConverter } from '../../src/git/GitBinaryToQuadConverter';
+import { GitToQuadConverter } from '../../src/git/GitToQuadConverter';
 import fs from 'fs';
 import type { Readable } from 'stream';
 import { GitObjectFactory } from '../../src/git/GitObjectFactory';
@@ -16,7 +16,7 @@ import fetch from "node-fetch";
 describe('CSS getter ', (): void => {
   const converter = new ChainedConverter([
     new RdfToQuadConverter(),
-    new GitBinaryToQuadConverter(),
+    new GitToQuadConverter(),
   ]);
 
   it('gitConverterTesting', async(): Promise<void> => {
@@ -34,13 +34,23 @@ describe('CSS getter ', (): void => {
       const metadata = new RepresentationMetadata('application/git');
     const identifier: ResourceIdentifier = { path: pathToGit };
 
+      const getRes0 = await fetch("http://localhost:3000/testi.txt", {
+          method: 'POST',
+          headers: {
+              'content-type': 'text/turtle'
+          },
+          body: "bluiiie"
+      });
+      console.log(getRes0.status);
+
+    /*
 
       const getRes0 = await fetch(`${path}/objects/04/5957f09af06330af241de36c37d04d863ed4d4`, {
           method: 'GET',
           headers: {'accept': 'application/git'}
       });
       console.log(getRes0.status);
-
+*/
 
       const contentType = getRes0.headers.get('content-type');
       console.log(contentType);
