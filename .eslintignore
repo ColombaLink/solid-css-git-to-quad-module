@@ -1,5 +1,5 @@
 dist
 node_modules
-test
-src/util
 coverage
+test
+src/util/ContentType.ts

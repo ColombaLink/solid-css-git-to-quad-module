@@ -1,23 +1,22 @@
 import fs from 'fs';
 import {
   RegexBasedExtensionMapper,
-} from "../../src/storage/mapping/RegexBasedExtensionMapper";
+} from '../../src/storage/mapping/RegexBasedExtensionMapper';
 import {
   BadRequestHttpError,
   NotFoundHttpError,
   NotImplementedHttpError,
-  trimTrailingSlashes
-} from "@solid/community-server";
-
+  trimTrailingSlashes,
+} from '@solid/community-server';
 
 jest.mock('fs');
 
 describe('An RegexBasedMapper', (): void => {
   const base = 'http://test.com/';
   const rootFilepath = 'uploads/';
-  const regex = /\/\w\w\/\w{38}$/gmu;
-  const contentTypeOfRegex= "application/git"
-  const mapper = new RegexBasedExtensionMapper(base, rootFilepath,regex,contentTypeOfRegex);
+  const regex = '\\/\\w\\w\\/\\w{38}$';
+  const contentTypeOfRegex = 'application/git';
+  const mapper = new RegexBasedExtensionMapper(base, rootFilepath, regex, contentTypeOfRegex);
   let fsPromises: Record<string, jest.Mock>;
 
   beforeEach(async(): Promise<void> => {
@@ -72,7 +71,7 @@ describe('An RegexBasedMapper', (): void => {
     });
 
     it('determines content-type by extension when looking for a file that does not exist.', async(): Promise<void> => {
-      fsPromises.readdir.mockReturnValue([ 'test.ttl' ]);
+      fsPromises.readdir.mockReturnValue(['test.ttl']);
       await expect(mapper.mapUrlToFilePath({ path: `${base}test.txt` }, false)).resolves.toEqual({
         identifier: { path: `${base}test.txt` },
         filePath: `${rootFilepath}test.txt`,
@@ -82,7 +81,7 @@ describe('An RegexBasedMapper', (): void => {
     });
 
     it('determines the content-type based on the extension.', async(): Promise<void> => {
-      fsPromises.readdir.mockReturnValue([ 'test.txt' ]);
+      fsPromises.readdir.mockReturnValue(['test.txt']);
       await expect(mapper.mapUrlToFilePath({ path: `${base}test.txt` }, false)).resolves.toEqual({
         identifier: { path: `${base}test.txt` },
         filePath: `${rootFilepath}test.txt`,
@@ -92,7 +91,7 @@ describe('An RegexBasedMapper', (): void => {
     });
 
     it('determines the content-type correctly for metadata files.', async(): Promise<void> => {
-      fsPromises.readdir.mockReturnValue([ 'test.meta' ]);
+      fsPromises.readdir.mockReturnValue(['test.meta']);
       await expect(mapper.mapUrlToFilePath({ path: `${base}test` }, true)).resolves.toEqual({
         identifier: { path: `${base}test` },
         filePath: `${rootFilepath}test.meta`,
@@ -100,17 +99,17 @@ describe('An RegexBasedMapper', (): void => {
         isMetadata: true,
       });
     });
-/*
-    it('matches even if the content-type does not match the extension.', async(): Promise<void> => {
-      fsPromises.readdir.mockReturnValue([ 'test.txt$.ttl' ]);
-      await expect(mapper.mapUrlToFilePath({ path: `${base}test.txt` }, false)).resolves.toEqual({
-        identifier: { path: `${base}test.txt` },
-        filePath: `${rootFilepath}test.txt$.ttl`,
-        contentType: 'text/turtle',
-        isMetadata: false,
-      });
-    });
-*/
+    //
+    // It('matches even if the content-type does not match the extension.', async(): Promise<void> => {
+    // fsPromises.readdir.mockReturnValue([ 'test.txt$.ttl' ]);
+    // await expect(mapper.mapUrlToFilePath({ path: `${base}test.txt` }, false)).resolves.toEqual({
+    //     identifier: { path: `${base}test.txt` },
+    //     filePath: `${rootFilepath}test.txt$.ttl`,
+    //     contentType: 'text/turtle',
+    //     isMetadata: false,
+    // });
+    // });
+    //
     it('generates a file path if the content-type was provided.', async(): Promise<void> => {
       await expect(mapper.mapUrlToFilePath({ path: `${base}test.txt` }, false, 'text/plain')).resolves.toEqual({
         identifier: { path: `${base}test.txt` },
@@ -136,25 +135,25 @@ describe('An RegexBasedMapper', (): void => {
     });
 
     it('supports custom types.', async(): Promise<void> => {
-      const customMapper = new RegexBasedExtensionMapper(base, rootFilepath,regex,contentTypeOfRegex, { cstm: 'text/custom' });
-      await expect(customMapper.mapUrlToFilePath({ path: `${base}test.cstm` }, false))
-          .resolves.toEqual({
-            identifier: { path: `${base}test.cstm` },
-            filePath: `${rootFilepath}test.cstm`,
-            contentType: 'text/custom',
-            isMetadata: false,
-          });
+      const customMapper = new RegexBasedExtensionMapper(base, rootFilepath, regex, contentTypeOfRegex, { cstm: 'text/custom' });
+      await expect(customMapper.mapUrlToFilePath({ path: `${base}test.cstm` }, false)).
+        resolves.toEqual({
+          identifier: { path: `${base}test.cstm` },
+          filePath: `${rootFilepath}test.cstm`,
+          contentType: 'text/custom',
+          isMetadata: false,
+        });
     });
 
     it('supports custom extensions.', async(): Promise<void> => {
-      const customMapper = new RegexBasedExtensionMapper(base, rootFilepath,regex,contentTypeOfRegex,{ cstm: 'text/custom' });
-      await expect(customMapper.mapUrlToFilePath({ path: `${base}test` }, false, 'text/custom'))
-          .resolves.toEqual({
-            identifier: { path: `${base}test` },
-            filePath: `${rootFilepath}test$.cstm`,
-            contentType: 'text/custom',
-            isMetadata: false,
-          });
+      const customMapper = new RegexBasedExtensionMapper(base, rootFilepath, regex, contentTypeOfRegex, { cstm: 'text/custom' });
+      await expect(customMapper.mapUrlToFilePath({ path: `${base}test` }, false, 'text/custom')).
+        resolves.toEqual({
+          identifier: { path: `${base}test` },
+          filePath: `${rootFilepath}test$.cstm`,
+          contentType: 'text/custom',
+          isMetadata: false,
+        });
     });
   });
 
@@ -208,27 +207,25 @@ describe('An RegexBasedMapper', (): void => {
     });
 
     it('supports custom extensions.', async(): Promise<void> => {
-      const customMapper = new RegexBasedExtensionMapper(base, rootFilepath,regex,contentTypeOfRegex, { cstm: 'text/custom' });
-      await expect(customMapper.mapFilePathToUrl(`${rootFilepath}test$.cstm`, false))
-          .resolves.toEqual({
-            identifier: { path: `${base}test` },
-            filePath: `${rootFilepath}test$.cstm`,
-            contentType: 'text/custom',
-            isMetadata: false,
-          });
+      const customMapper = new RegexBasedExtensionMapper(base, rootFilepath, regex, contentTypeOfRegex, { cstm: 'text/custom' });
+      await expect(customMapper.mapFilePathToUrl(`${rootFilepath}test$.cstm`, false)).
+        resolves.toEqual({
+          identifier: { path: `${base}test` },
+          filePath: `${rootFilepath}test$.cstm`,
+          contentType: 'text/custom',
+          isMetadata: false,
+        });
     });
   });
 
   it('map regex suffix to content type', async(): Promise<void> => {
-    const customMapper = new RegexBasedExtensionMapper(base, rootFilepath,regex,contentTypeOfRegex);
-    await expect(customMapper.mapUrlToFilePath({ path: `${base}a/resource/12/97fc1e89a6b174c7a5f4a48001f78789a89f4c` }, false))
-        .resolves.toEqual({
-          identifier: { path: `${base}a/resource/12/97fc1e89a6b174c7a5f4a48001f78789a89f4c` },
-          filePath: `${rootFilepath}a/resource/12/97fc1e89a6b174c7a5f4a48001f78789a89f4c`,
-          contentType: 'application/git',
-          isMetadata: false,
-        });
-  })
-
-
+    const customMapper = new RegexBasedExtensionMapper(base, rootFilepath, regex, contentTypeOfRegex);
+    await expect(customMapper.mapUrlToFilePath({ path: `${base}a/resource/12/97fc1e89a6b174c7a5f4a48001f78789a89f4c` }, false)).
+      resolves.toEqual({
+        identifier: { path: `${base}a/resource/12/97fc1e89a6b174c7a5f4a48001f78789a89f4c` },
+        filePath: `${rootFilepath}a/resource/12/97fc1e89a6b174c7a5f4a48001f78789a89f4c`,
+        contentType: 'application/git',
+        isMetadata: false,
+      });
+  });
 });

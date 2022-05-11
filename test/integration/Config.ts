@@ -1,7 +1,7 @@
 import type { IModuleState } from 'componentsjs';
 import { ComponentsManager } from 'componentsjs';
 import { remove } from 'fs-extra';
-import {joinFilePath} from "@solid/community-server";
+import { joinFilePath } from '@solid/community-server';
 
 let cachedModuleState: IModuleState;
 
@@ -16,7 +16,7 @@ export async function instantiateFromConfig(componentUrl: string, configPaths: s
   cachedModuleState = manager.moduleState;
 
   if (!Array.isArray(configPaths)) {
-    configPaths = [ configPaths ];
+    configPaths = [configPaths];
   }
 
   // Instantiate the component from the config(s)
@@ -48,10 +48,7 @@ export function getDefaultVariables(port: number, baseUrl?: string): Record<stri
     'urn:solid-server:default:variable:port': port,
     'urn:solid-server:default:variable:loggingLevel': 'off',
     'urn:solid-server:default:variable:showStackTrace': true,
-    'urn:solid-server:default:variable:rootFilePath': '../../data', //not sure where it should be
-       'urn:solid-server:default:variable:seededPodConfigJson': '../'
+    'urn:solid-server:default:variable:seededPodConfigJson': null,
+    'urn:solid-server:default:variable:rootFilePath': '.test-folder', // Attention this path is not from here but from ../../path
   };
-}
-
-export default class Config_1 {
 }

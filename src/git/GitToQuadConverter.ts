@@ -31,9 +31,11 @@ export class GitToQuadConverter extends BaseTypedRepresentationConverter {
     }
 
     // Since the readable is in object mode the "size" argument we read does not matter
+
     const data: Buffer = representation.data.read();
-    const syncTxt = unzipSync(data).toString('utf-8');
     const unzip: Buffer = unzipSync(data);
+    const syncTxt = unzipSync(data).toString('utf-8');
+
     let quad: Quad[];
 
     // Figure out the type of Git Object we are dealing with
@@ -52,7 +54,6 @@ export class GitToQuadConverter extends BaseTypedRepresentationConverter {
       quad = [];
       this.logger.debug('undefined');
     }
-
     return new BasicRepresentation(quad, representation.metadata, INTERNAL_QUADS);
   }
 }

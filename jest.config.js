@@ -21,5 +21,5 @@ module.exports = {
     '^jose/(.*)$': '<rootDir>/node_modules/jose/dist/node/cjs/$1',
   },
   // Slower machines had problems calling the WebSocket integration callbacks on time
-  testTimeout: 60_000,
+  testTimeout: 600_000,
 };

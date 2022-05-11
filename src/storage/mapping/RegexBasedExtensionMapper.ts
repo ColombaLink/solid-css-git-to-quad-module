@@ -14,12 +14,12 @@ export class RegexBasedExtensionMapper extends ExtensionBasedMapper {
   public constructor(
     base: string,
     rootFilepath: string,
-    regex: RegExp,
+    regex: string,
     contentTypeOfRegex: string,
     customTypes?: Record<string, string>,
   ) {
     super(base, rootFilepath, customTypes);
-    this.regex = regex;
+    this.regex = new RegExp(regex, 'u');
     this.contentTypeOfRegex = contentTypeOfRegex;
   }
 
@@ -35,7 +35,6 @@ export class RegexBasedExtensionMapper extends ExtensionBasedMapper {
         resourceLink.contentType = this.contentTypeOfRegex;
       }
     }
-
     return resourceLink;
   }
 }
