@@ -2,19 +2,7 @@
 import fetch from 'node-fetch';
 import { GitObjectFactory } from '../../src/git/GitObjectFactory';
 import fs from 'fs';
-import { unzipSync } from 'zlib';
-import type { RepresentationPreferences, ResourceIdentifier } from '@solid/community-server';
-import {
-  BasicRepresentation,
-  ChainedConverter,
-  INTERNAL_QUADS,
-  RdfToQuadConverter,
-  RepresentationMetadata,
-} from '@solid/community-server';
-import type { Readable } from 'stream';
-import { GitToQuadConverter } from '../../src';
 import { getDefaultVariables, getTestConfigPath, instantiateFromConfig, removeFolder } from './Config';
-import streamifyArray from 'streamify-array';
 
 Object.defineProperty(exports, '__esModule', { value: true });
 const port = 3_001;
@@ -65,4 +53,3 @@ describe('GitToQuadConverter Integration Test', () => {
     expect(contentType).toBe('application/git');
   });
 });
-// # sourceMappingURL=Yjs.test.js.map
