@@ -10,8 +10,7 @@ import { GitUtils } from './GitUtils';
 import type { Quad } from 'rdf-js';
 import { unzipSync } from 'zlib';
 import { APPLICATION_GIT } from '../util/ContentType';
-import arrayifyStream from "arrayify-stream";
-import fs from "fs";
+import fs from 'fs';
 
 export class GitToQuadConverter extends BaseTypedRepresentationConverter {
   protected readonly logger = getLoggerFor(this);
@@ -28,7 +27,7 @@ export class GitToQuadConverter extends BaseTypedRepresentationConverter {
      * TODO: Schould not read from fs, but get a readable
      */
     // @ts-ignore
-    let fileRead= fs.readFileSync(representation.data.path)
+    const fileRead = fs.readFileSync(representation.data.path);
 
     const pathOfIdentifier = identifier.path;
     const index = pathOfIdentifier.lastIndexOf('/objects/');
