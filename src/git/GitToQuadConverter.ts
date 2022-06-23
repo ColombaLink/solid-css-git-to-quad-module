@@ -10,6 +10,8 @@ import { GitUtils } from './GitUtils';
 import type { Quad } from 'rdf-js';
 import { unzipSync } from 'zlib';
 import { APPLICATION_GIT } from '../util/ContentType';
+import arrayifyStream from "arrayify-stream";
+import fs from "fs";
 
 export class GitToQuadConverter extends BaseTypedRepresentationConverter {
   protected readonly logger = getLoggerFor(this);
@@ -21,6 +23,13 @@ export class GitToQuadConverter extends BaseTypedRepresentationConverter {
   public async handle({ representation, identifier }: RepresentationConverterArgs): Promise<Representation> {
     this.logger.debug('Convert git to quads.');
 
+
+    /**
+     * TODO: Schould not read from fs, but get a readable
+     */
+    // @ts-ignore
+    let fileRead= fs.readFileSync(representation.data.path)
+
     const pathOfIdentifier = identifier.path;
     const index = pathOfIdentifier.lastIndexOf('/objects/');
     let oid = '';
@@ -31,15 +40,22 @@ export class GitToQuadConverter extends BaseTypedRepresentationConverter {
     }
 
     // Since the readable is in object mode the "size" argument we read does not matter
+/*
+    let tryRead = representation.data;
+    console.log(tryRead)
+    let tryReadIt = tryRead.read();
+    let tryReadItWait =await tryRead.read();
 
+    console.log(representation.data.read())
     const data: Buffer = representation.data.read();
-    const unzip: Buffer = unzipSync(data);
-    const syncTxt = unzipSync(data).toString('utf-8');
+*/
+    const unzip: Buffer = unzipSync(fileRead);
+    const syncTxt = unzipSync(fileRead).toString('utf-8');
 
     let quad: Quad[];
 
     // Figure out the type of Git Object we are dealing with
-    const compare = data.readUInt8(2);
+    const compare = fileRead.readUInt8(2);
     if (compare === 75) {
       this.logger.debug(' Found a Blob');
       const txtNoPrefix = syncTxt.slice(8, syncTxt.length);
