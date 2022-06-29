@@ -43,6 +43,26 @@ npm start
 * *RegexBasedExtensionMapper*: can be configured into the CSS in config/util/identifiers/ an example configuration can be found in this config/util/identifiers/suffix.json
 
 
+## Git Conversion Examples
+
+There are three different Git objects:
+
+- Example Commit:
+    - Git:\
+        tree 53c1ea3779eb7d4f014d541f0236619c07ddf2de\
+        author alice <alice@git.com> 1656495445 +0200\
+        committer alice <alice@git.com> 1656495445 +0200
+
+
+- Tree:
+    - Git:\
+        100644 blob bed8945cb011eb0246d2ff6957518bee03e54fc0    filename2
+
+
+- Blob (are not converted since it could be any data e.g. JSON) 
+    
+
+
 
 
 
