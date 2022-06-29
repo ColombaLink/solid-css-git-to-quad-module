@@ -45,21 +45,92 @@ npm start
 
 ## Git Conversion Examples
 
-There are three different Git objects:
+Examples of the conversion of the three different Git objects:
 
-- Example Commit:
+- Commit:
     - Git:\
         tree 53c1ea3779eb7d4f014d541f0236619c07ddf2de\
         author alice <alice@git.com> 1656495445 +0200\
         committer alice <alice@git.com> 1656495445 +0200
 
 
+    - JSON-LD:\
+        [
+  {
+    "@id": "7d11dac8c7177b68ab0a22d26b67b7a95be3335e",\
+    "https://www.w3.org/ns/activitystreams#target": [
+      {
+        "@id": " 53c1ea3779eb7d4f014d541f0236619c07ddf2de"
+      }
+    ],\
+    "https://www.w3.org/ns/activitystreams#author": [
+      {
+        "@id": "alice"
+      }
+    ],\
+    "https://www.w3.org/ns/activitystreams#actor": [
+      {
+        "@id": "alice"
+      }
+    ],\
+    "https://www.w3.org/ns/activitystreams#Event": [
+      {
+        "@id": "add firtst event"
+      }
+    ]
+  }
+]
+
+
+
 - Tree:
     - Git:\
-        100644 blob bed8945cb011eb0246d2ff6957518bee03e54fc0    filename2
+        100644 blob c367386a67cdcff6f43cd560f4bf21f82f9593a1    filename\
+        040000 tree ad1aab27425bace3d27e932d09684ce10be1907a    treeName
+
+    - JSON-LD:\
+        [
+  {
+    "@id": "filename",\
+    "http://www.w3.org/ns/ldp#NonRDFSource": [
+      {
+        "@id": "http://localhost:3000/objects/c3/67386a67cdcff6f43cd560f4bf21f82f9593a1"
+      }
+    ]\
+  },
+  {
+    "@id": "treeName",\
+    "http://www.w3.org/ns/ldp#BasicContainer": [
+      {
+        "@id": "http://localhost:3000/objects/ad/1aab27425bace3d27e932d09684ce10be1907a"
+      }
+    ]
+  }
+]
 
 
-- Blob (are not converted since it could be any data e.g. JSON) 
+
+
+- Blob (Data of the Blob is ignored in the Quad only Metadata is provided since the Data could be anything)
+    
+    - Git:\ 
+        "any DATA"
+
+    - JSON-LD:\
+        [
+  {
+    "@id": "bed8945cb011eb0246d2ff6957518bee03e54fc0",\
+    "http://www.w3.org/ns/ldp#NonRDFSource": [
+      {
+        "@id": "http://localhost:3000/objects/be/d8945cb011eb0246d2ff6957518bee03e54fc0"
+      }
+    ]
+  }
+]
+
+
+
+
     
 
 
