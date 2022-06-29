@@ -45,7 +45,7 @@ npm start
 
 ## Git Conversion Examples
 
-Examples of the conversion of the three different Git objects:
+Examples of the conversion of the three different Git objects into JSON-LD:
 
 - Commit:
     - Git:\
