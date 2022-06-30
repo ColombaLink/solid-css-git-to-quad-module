@@ -10,7 +10,7 @@ import { GitUtils } from './GitUtils';
 import type { Quad } from 'rdf-js';
 import { unzipSync } from 'zlib';
 import { APPLICATION_GIT } from '../util/ContentType';
-import fs from 'fs';
+import fs from "fs";
 
 export class GitToQuadConverter extends BaseTypedRepresentationConverter {
   protected readonly logger = getLoggerFor(this);
@@ -22,13 +22,6 @@ export class GitToQuadConverter extends BaseTypedRepresentationConverter {
   public async handle({ representation, identifier }: RepresentationConverterArgs): Promise<Representation> {
     this.logger.debug('Convert git to quads.');
 
-
-    /**
-     * TODO: Schould not read from fs, but get a readable
-     */
-    // @ts-ignore
-    const fileRead = fs.readFileSync(representation.data.path);
-
     const pathOfIdentifier = identifier.path;
     const index = pathOfIdentifier.lastIndexOf('/objects/');
     let oid = '';
@@ -38,23 +31,26 @@ export class GitToQuadConverter extends BaseTypedRepresentationConverter {
       oid = pathOfIdentifier.slice(index + 9, index + 11) + pathOfIdentifier.slice(index + 12);
     }
 
-    // Since the readable is in object mode the "size" argument we read does not matter
-/*
-    let tryRead = representation.data;
-    console.log(tryRead)
-    let tryReadIt = tryRead.read();
-    let tryReadItWait =await tryRead.read();
-
-    console.log(representation.data.read())
-    const data: Buffer = representation.data.read();
-*/
-    const unzip: Buffer = unzipSync(fileRead);
-    const syncTxt = unzipSync(fileRead).toString('utf-8');
+    async function streamToString(stream: any) {
+      let chunks: any[];
+      chunks = [];
+      return new Promise((resolve, reject) => {
+        // @ts-ignore
+        stream.on('data', chunk => chunks.push(Buffer.from(chunk)));
+        // @ts-ignore
+        stream.on('error', err => reject(err));
+        stream.on('end', () => resolve(Buffer.concat(chunks)));
+      });
+    }
+    // @ts-ignore
+    const result:Buffer = await streamToString(representation.data);
+    const unzip: Buffer = unzipSync(result);
+    const syncTxt = unzipSync(result).toString('utf-8');
 
     let quad: Quad[];
 
     // Figure out the type of Git Object we are dealing with
-    const compare = fileRead.readUInt8(2);
+    const compare = result.readUInt8(2);
     if (compare === 75) {
       this.logger.debug(' Found a Blob');
       const txtNoPrefix = syncTxt.slice(8, syncTxt.length);
