@@ -28,7 +28,7 @@ export class GitUtils {
       const indexi = indexOfBackslash[i];
       if (i > 1 && indexi - 20 < indexOfBackslash[i - 1]) {
         // E.g indexi=30 last index 15 -> 30-20 < 15 === true
-        const rm = indexOfBackslash.splice(i, 1);
+        indexOfBackslash.splice(i, 1);
         i -= 1;
         // The array size get reduced so we reduce loop counter as well
         continue;
@@ -58,7 +58,7 @@ export class GitUtils {
       const indi = indexOfSpaces[i];
       if (i > 1 && indexOfBackslash[i - 1] + 20 > indi) {
         // Ignore space encodings in the hash
-         let rm = indexOfSpaces.splice(i, 1);
+        indexOfSpaces.splice(i, 1);
         // Console.log(`Found Space encoding in Hash, ignored at index: ${rm}`);
         i -= 1;
         continue;
@@ -79,7 +79,7 @@ export class GitUtils {
         quads.push(tr);
       } else if (modeArray[i] === '0000') {
         const pathToNewTree = `${path.slice(0, path.indexOf('objects') + 8) + element.slice(0, 2)}/${element.slice(2)}`;
-        const tr = triple(namedNode(fileNamesArray[i]), namedNode(LDP.BasicContainer), namedNode(pathToNewTree));
+        const tr = triple(namedNode(path), namedNode(LDP.BasicContainer), namedNode(pathToNewTree));
         quads.push(tr);
       } else {
         // Console.log('udefined element in tree');
