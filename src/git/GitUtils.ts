@@ -108,7 +108,7 @@ export class GitUtils {
     }
     // Find out the tree this commit points to
     const startOfHash = data.indexOf('tree') + 4;
-    const hashOfTree: string = data.slice(startOfHash, startOfHash + 41);
+    const hashOfTree: string = data.slice(startOfHash, startOfHash + 41).replace(' ', '');
 
     // Get parents (0 first commit / normally not more than 2 if there are no merges)
     const parentArray = [];
@@ -146,19 +146,22 @@ export class GitUtils {
     const startCommitMsg = data.indexOf('\n\n');
     const msg = data.slice(startCommitMsg + 2);
 
+    id = `${path.slice(0, path.indexOf('objects') + 8) + id.slice(0, 2)}/${id.slice(2)}`.replace('http', 'https');
     // Loop over parents
     for (const element of parentArray) {
-      const pr = triple(namedNode(id), namedNode(AS.prev), namedNode(element));
+      const parentCommitUrl = `${path.slice(0, path.indexOf('objects') + 8) + element.slice(0, 2)}/${element.slice(2)}`.replace('http', 'https');
+      const pr = triple(namedNode(id), namedNode(AS.prev), namedNode(parentCommitUrl));
       quads.push(pr);
     }
 
-    const tr = triple(namedNode(id), namedNode(AS.target), namedNode(hashOfTree));
+    const treeUrl = `${path.slice(0, path.indexOf('objects') + 8) + hashOfTree.slice(0, 2)}/${hashOfTree.slice(2)}`.replace('http', 'https');
+    const tr = triple(namedNode(id), namedNode(AS.target), namedNode(treeUrl));
     quads.push(tr);
     const au = triple(namedNode(id), namedNode(AS.author), namedNode(authorOfCommit));
     quads.push(au);
     const co = triple(namedNode(id), namedNode(AS.actor), namedNode(committerOfCommit));
     quads.push(co);
-    const me = triple(namedNode(id), namedNode(AS.Event), namedNode(msg));
+    const me = triple(namedNode(id), namedNode(AS.summary), literal(msg));
     quads.push(me);
 
     return quads;
