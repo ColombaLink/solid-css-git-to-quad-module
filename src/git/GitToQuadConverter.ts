@@ -59,7 +59,8 @@ export class GitToQuadConverter extends BaseTypedRepresentationConverter {
     } else if (compare === 43) {
       this.logger.debug('Found a Tree');
       quad = GitUtils.treeToQuad(unzip, pathOfIdentifier);
-    } else if (compare === 149) {
+    } else if (compare === 149 || compare === 141 || compare === 157) {
+      // todo: investigate why byte sequence is not static
       this.logger.debug('Found a Commit');
       quad = GitUtils.commitToQuad(syncTxt, oid, pathOfIdentifier);
     } else {
