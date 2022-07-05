@@ -49,85 +49,96 @@ Examples of the conversion of the three different Git objects into JSON-LD:
 
 - Commit:
     - Git:\
-        tree 53c1ea3779eb7d4f014d541f0236619c07ddf2de\
-        author alice <alice@git.com> 1656495445 +0200\
-        committer alice <alice@git.com> 1656495445 +0200
+        tree 86465fc6334e8a7a6b53ca8c538f7f2496f6a44b\
+        parent 1fa8a88f867edfdc252c762b8975cd886ce9e25a\
+        author fuubi <fuubi@protonmail.ch> 1654716381 +0200\
+        committer fuubi <fuubi@protonmail.ch> 1654716381 +0200
+
 
 
     - JSON-LD:
 
   ```json
-
   {
-    "@id": "7d11dac8c7177b68ab0a22d26b67b7a95be3335e",
+    "@id": "https://localhost:3000/orgs/south-summit/iotdot-mini/.dybli/objects/1a/5c659770fda3da8a5f6346433eb37a0436cdc3",
+    "https://www.w3.org/ns/activitystreams#prev": [
+      {
+        "@id": "https://localhost:3000/orgs/south-summit/iotdot-mini/.dybli/objects/1f/a8a88f867edfdc252c762b8975cd886ce9e25a"
+      }
+    ],
     "https://www.w3.org/ns/activitystreams#target": [
       {
-        "@id": " 53c1ea3779eb7d4f014d541f0236619c07ddf2de"
+        "@id": "https://localhost:3000/orgs/south-summit/iotdot-mini/.dybli/objects/86/465fc6334e8a7a6b53ca8c538f7f2496f6a44b"
       }
     ],
     "https://www.w3.org/ns/activitystreams#author": [
       {
-        "@id": "alice"
+        "@id": "fuubi"
       }
     ],
     "https://www.w3.org/ns/activitystreams#actor": [
       {
-        "@id": "alice"
+        "@id": "fuubi"
       }
     ],
-    "https://www.w3.org/ns/activitystreams#Event": [
+    "https://www.w3.org/ns/activitystreams#summary": [
       {
-        "@id": "add firtst event"
+        "@value": "add event."
       }
     ]
   }
+
   ```
 
 
 
 - Tree:
     - Git:\
-        100644 blob c367386a67cdcff6f43cd560f4bf21f82f9593a1    filename\
-        040000 tree ad1aab27425bace3d27e932d09684ce10be1907a    treeName
+       040000 tree 8ae26f84a29b72e9611f1439f829f89664aaca40	orgs
+
 
     - JSON-LD:
   ```json
-    {
-    "@id": "filename",
-    "http://www.w3.org/ns/ldp#NonRDFSource": [
+     {
+    "@id": "http://localhost:3000/orgs/south-summit/iotdot-mini/.dybli/objects/1a/1d7028da939437f8d51a44f27dbf7f64bb5936",
+    "http://www.w3.org/ns/ldp#contains": [
       {
-        "@id": "http://localhost:3000/objects/c3/67386a67cdcff6f43cd560f4bf21f82f9593a1"
+        "@id": "http://localhost:3000/orgs/south-summit/iotdot-mini/.dybli/objects/8a/e26f84a29b72e9611f1439f829f89664aaca40"
       }
+    ],
+    "@type": [
+      "http://www.w3.org/ns/ldp#Container"
     ]
   },
   {
-    "@id": "treeName",
-    "http://www.w3.org/ns/ldp#BasicContainer": [
+    "@id": "http://localhost:3000/orgs/south-summit/iotdot-mini/.dybli/objects/8a/e26f84a29b72e9611f1439f829f89664aaca40",
+    "http://purl.org/dc/terms/description": [
       {
-        "@id": "http://localhost:3000/objects/ad/1aab27425bace3d27e932d09684ce10be1907a"
+        "@value": "orgs"
       }
     ]
   }
+
   ```
 
 
 
 
 - Blob (Data of the Blob is ignored in the Quad only Metadata is provided since the Data could be anything)
-    
-    - Git:\ 
+    - Git:\
         "any DATA"
 
     - JSON-LD:
   ```json
-  {
-    "@id": "bed8945cb011eb0246d2ff6957518bee03e54fc0",\
+   {
+    "@id": "1a1f51f4a9194d5f010fe0c6e6bd395b09486061",
     "http://www.w3.org/ns/ldp#NonRDFSource": [
       {
-        "@id": "http://localhost:3000/objects/be/d8945cb011eb0246d2ff6957518bee03e54fc0"
+        "@id": "http://localhost:3000/orgs/south-summit/iotdot-mini/.dybli/objects/1a/1f51f4a9194d5f010fe0c6e6bd395b09486061"
       }
     ]
   }
+
   ```
 
     
