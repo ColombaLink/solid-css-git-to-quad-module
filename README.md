@@ -1,6 +1,20 @@
-# [Community Solid Server (CSS)](https://github.com/CommunitySolidServer/CommunitySolidServer) [GIT](https://git-scm.com/) Converter Component ([Component.js](https://componentjs.com/))
+# [Community Solid Server (CSS)](https://github.com/CommunitySolidServer/CommunitySolidServer) [GIT](https://git-scm.com/) to Quad Module 
 
-## General Description
+
+The Community Solid Server Git-to-Quad-Module (CSS-GtQ-M) is a sub-module for the Community Solid Server, that can be integrated into the modulare structure of the CSS with help of the component.js dependency injection framework. The following Figure shows where the module is integrated into the Solid architecture.
+
+![Overview](./ClassDiagramOverviewGitToQuad.drawio.svg)
+
+The standard [CSS](https://github.com/CommunitySolidServer/CommunitySolidServer) does not support converting Git objects, which is not a problem for the standard CSS since normally no Git objects are used. But with another sub-module called [CSS-Git-Http-Backend-Module](https://gitlab.com/ColombaLink/dev/dapsi/public/css/modules/css-git-http-backend-module) the CSS gets extended to support Git, which allows users to write git commands to push and pull data to and from the CSS. Therefore Git objects are often present on the CSS and therefore a conversion module is required.
+
+This module allows to retrieve Git objects in different [RDF](https://www.w3.org/RDF/) formats. This can be done by making a GET request with a desired content type in the Accept header, to the CSS. The CSS will then return the Git objects in the desired data format.
+
+### Running and Testing
+
+To get started simply clone this repository and run ``npm i`` and ``npm start``. 
+To test this module one can either create some Git objects on their own on the CSS or run the Unit test in: *test/unit/GitToQuadConverter.test.ts* which will create some different Git Objects (Commit, Tree, Blob) which can be seen in the *.test-folder* under objects. The easiest way to test the conversion is to make a GET request on one of those objects for example with curl: ``curl -H "Accept: application/ld+json -X GET http://localhost/.test-folder/objects/xx/xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx`` where the **x**'s have to be replaced with an existing Git object from the .test-folder.  
+
+## Detailed Description
 
 [CSS](https://github.com/CommunitySolidServer/CommunitySolidServer) Module which allows requesting Git Objects from the CSS in any any available format.
 
