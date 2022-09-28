@@ -3,6 +3,11 @@ import { literal, namedNode, triple } from '@rdfjs/data-model';
 import { AS, LDP, RDF } from '@inrupt/vocab-common-rdf';
 import { DC } from '@solid/community-server';
 
+/**
+ *  Transforms the different Git objects received from the GitToQuadConverter, into Quads (internal/Quads)
+ *  which can then be transformed again to any Format the CSS allows
+ */
+
 export class GitUtils {
   public static blobToQuad(data: string, oid: string, uri: string): Quad[] {
     const quads: Quad[] = [];

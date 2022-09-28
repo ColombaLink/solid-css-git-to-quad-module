@@ -36,6 +36,7 @@ describe('GitToQuadConverter Integration Test', () => {
       });
 
       console.log(put1.status);
+      expect(put1.status)
     } catch (ex) {
       console.log(ex);
     }

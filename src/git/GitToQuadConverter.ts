@@ -12,6 +12,12 @@ import { unzipSync } from 'zlib';
 import { APPLICATION_GIT } from '../util/ContentType';
 import fs from "fs";
 
+/**
+ *  The GitToQuadConverter is an extension of the BaseTypeRepresentationConverter and recognizes the different
+ *  Git objects (Commit, Tree, Blob ) based on a prefix, then forwards it to GitUtils.ts which converts it to Quads
+ */
+
+
 export class GitToQuadConverter extends BaseTypedRepresentationConverter {
   protected readonly logger = getLoggerFor(this);
 
