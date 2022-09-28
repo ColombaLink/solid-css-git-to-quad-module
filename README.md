@@ -5,9 +5,9 @@ The Community Solid Server Git-to-Quad-Module (CSS-GtQ-M) is a sub-module for th
 
 ![Overview](./ClassDiagramOverviewGitToQuad.drawio.svg)
 
-The standard [CSS](https://github.com/CommunitySolidServer/CommunitySolidServer) does not support converting Git objects, which is not a problem for the standard CSS since normally no Git objects are used. But with another sub-module called [CSS-Git-Http-Backend-Module](https://gitlab.com/ColombaLink/dev/dapsi/public/css/modules/css-git-http-backend-module) the CSS gets extended to support Git, which allows users to write git commands to push and pull data to and from the CSS. Therefore Git objects are often present on the CSS and therefore a conversion module is required.
+The standard [CSS](https://github.com/CommunitySolidServer/CommunitySolidServer) does not support converting Git objects, which is not a problem for the standard CSS since normally no Git objects are used. But with another sub-module called [CSS-Git-Http-Backend-Module](https://gitlab.com/ColombaLink/dev/dapsi/public/css/modules/css-git-http-backend-module) the CSS gets extended to support Git, which allows users to use git commands to push and pull data to and from the CSS. Therefore Git objects are often present on the CSS and therefore a conversion module is required.
 
-This module allows to retrieve Git objects in different [RDF](https://www.w3.org/RDF/) formats. This can be done by making a GET request with a desired content type in the Accept header, to the CSS. The CSS will then return the Git objects in the desired data format.
+This module allows to retrieve Git objects in different [RDF](https://www.w3.org/RDF/) formats. This can be done by making a GET request to the CSS with the desired content type in the Accept header. The CSS will then return the Git objects in the desired data format.
 
 ### Running and Testing
 
@@ -16,9 +16,7 @@ To test this module one can either create some Git objects on their own on the C
 
 ## Detailed Description
 
-[CSS](https://github.com/CommunitySolidServer/CommunitySolidServer) Module which allows requesting Git Objects from the CSS in any any available format.
-
-Backend Module which allows Clients to make GET request to the CSS to retrieve Git Objects in all available formats.
+This [CSS](https://github.com/CommunitySolidServer/CommunitySolidServer) Backend Module allows retrieving Git Objects from the CSS in different RDF formats by sending GET requests.
 
 The git folder consists of of three classes:
 
@@ -34,21 +32,12 @@ In Storage/mapping
 
 
 
-
-
 Examples:
 
 get content type = internal/quads
 
 get content type = text/html
 
-## Getting Started
-
-To get started in seconds, clone the repo and:
-```
-npm i
-npm start
-```
 
 ## Integration into CSS
 
