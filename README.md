@@ -1,10 +1,22 @@
-# [Community Solid Server (CSS)](https://github.com/CommunitySolidServer/CommunitySolidServer) [GIT](https://git-scm.com/) Converter Component ([Component.js](https://componentjs.com/))
+# [Community Solid Server (CSS)](https://github.com/CommunitySolidServer/CommunitySolidServer) [GIT](https://git-scm.com/) to Quad Module 
 
-## General Description
 
-[CSS](https://github.com/CommunitySolidServer/CommunitySolidServer) Module which allows requesting Git Objects from the CSS in any any available format.
+The Community Solid Server Git-to-Quad-Module (CSS-GtQ-M) is a sub-module for the Community Solid Server, that can be integrated into the modulare structure of the CSS with help of the component.js dependency injection framework. The following Figure shows where the module is integrated into the Solid architecture.
 
-Backend Module which allows Clients to make GET request to the CSS to retrieve Git Objects in all available formats.
+![Overview](./ClassDiagramOverviewGitToQuad.drawio.svg)
+
+The standard [CSS](https://github.com/CommunitySolidServer/CommunitySolidServer) does not support converting Git objects, which is not a problem for the standard CSS since normally no Git objects are used. But with another sub-module called [CSS-Git-Http-Backend-Module](https://gitlab.com/ColombaLink/dev/dapsi/public/css/modules/css-git-http-backend-module) the CSS gets extended to support Git, which allows users to use git commands to push and pull data to and from the CSS. Therefore Git objects are often present on the CSS and therefore a conversion module is required.
+
+This module allows to retrieve Git objects in different [RDF](https://www.w3.org/RDF/) formats. This can be done by making a GET request to the CSS with the desired content type in the Accept header. The CSS will then return the Git objects in the desired data format.
+
+### Running and Testing
+
+To get started simply clone this repository and run ``npm i`` and ``npm start``. 
+To test this module one can either create some Git objects on their own on the CSS or run the Unit test in: *test/unit/GitToQuadConverter.test.ts* which will create some different Git Objects (Commit, Tree, Blob) which can be seen in the *.test-folder* under objects. The easiest way to test the conversion is to make a GET request on one of those objects for example with curl: ``curl -H "Accept: application/ld+json -X GET http://localhost/.test-folder/objects/xx/xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx`` where the **x**'s have to be replaced with an existing Git object from the .test-folder.  
+
+## Detailed Description
+
+This [CSS](https://github.com/CommunitySolidServer/CommunitySolidServer) Backend Module allows retrieving Git Objects from the CSS in different RDF formats by sending GET requests.
 
 The git folder consists of of three classes:
 
@@ -20,21 +32,12 @@ In Storage/mapping
 
 
 
-
-
 Examples:
 
 get content type = internal/quads
 
 get content type = text/html
 
-## Getting Started
-
-To get started in seconds, clone the repo and:
-```
-npm i
-npm start
-```
 
 ## Integration into CSS
 
@@ -49,85 +52,96 @@ Examples of the conversion of the three different Git objects into JSON-LD:
 
 - Commit:
     - Git:\
-        tree 53c1ea3779eb7d4f014d541f0236619c07ddf2de\
-        author alice <alice@git.com> 1656495445 +0200\
-        committer alice <alice@git.com> 1656495445 +0200
+        tree 86465fc6334e8a7a6b53ca8c538f7f2496f6a44b\
+        parent 1fa8a88f867edfdc252c762b8975cd886ce9e25a\
+        author fuubi <fuubi@protonmail.ch> 1654716381 +0200\
+        committer fuubi <fuubi@protonmail.ch> 1654716381 +0200
+
 
 
     - JSON-LD:
 
   ```json
-
   {
-    "@id": "7d11dac8c7177b68ab0a22d26b67b7a95be3335e",
+    "@id": "https://localhost:3000/orgs/south-summit/iotdot-mini/.dybli/objects/1a/5c659770fda3da8a5f6346433eb37a0436cdc3",
+    "https://www.w3.org/ns/activitystreams#prev": [
+      {
+        "@id": "https://localhost:3000/orgs/south-summit/iotdot-mini/.dybli/objects/1f/a8a88f867edfdc252c762b8975cd886ce9e25a"
+      }
+    ],
     "https://www.w3.org/ns/activitystreams#target": [
       {
-        "@id": " 53c1ea3779eb7d4f014d541f0236619c07ddf2de"
+        "@id": "https://localhost:3000/orgs/south-summit/iotdot-mini/.dybli/objects/86/465fc6334e8a7a6b53ca8c538f7f2496f6a44b"
       }
     ],
     "https://www.w3.org/ns/activitystreams#author": [
       {
-        "@id": "alice"
+        "@id": "fuubi"
       }
     ],
     "https://www.w3.org/ns/activitystreams#actor": [
       {
-        "@id": "alice"
+        "@id": "fuubi"
       }
     ],
-    "https://www.w3.org/ns/activitystreams#Event": [
+    "https://www.w3.org/ns/activitystreams#summary": [
       {
-        "@id": "add firtst event"
+        "@value": "add event."
       }
     ]
   }
+
   ```
 
 
 
 - Tree:
     - Git:\
-        100644 blob c367386a67cdcff6f43cd560f4bf21f82f9593a1    filename\
-        040000 tree ad1aab27425bace3d27e932d09684ce10be1907a    treeName
+       040000 tree 8ae26f84a29b72e9611f1439f829f89664aaca40	orgs
+
 
     - JSON-LD:
   ```json
-    {
-    "@id": "filename",
-    "http://www.w3.org/ns/ldp#NonRDFSource": [
+     {
+    "@id": "http://localhost:3000/orgs/south-summit/iotdot-mini/.dybli/objects/1a/1d7028da939437f8d51a44f27dbf7f64bb5936",
+    "http://www.w3.org/ns/ldp#contains": [
       {
-        "@id": "http://localhost:3000/objects/c3/67386a67cdcff6f43cd560f4bf21f82f9593a1"
+        "@id": "http://localhost:3000/orgs/south-summit/iotdot-mini/.dybli/objects/8a/e26f84a29b72e9611f1439f829f89664aaca40"
       }
+    ],
+    "@type": [
+      "http://www.w3.org/ns/ldp#Container"
     ]
   },
   {
-    "@id": "treeName",
-    "http://www.w3.org/ns/ldp#BasicContainer": [
+    "@id": "http://localhost:3000/orgs/south-summit/iotdot-mini/.dybli/objects/8a/e26f84a29b72e9611f1439f829f89664aaca40",
+    "http://purl.org/dc/terms/description": [
       {
-        "@id": "http://localhost:3000/objects/ad/1aab27425bace3d27e932d09684ce10be1907a"
+        "@value": "orgs"
       }
     ]
   }
+
   ```
 
 
 
 
 - Blob (Data of the Blob is ignored in the Quad only Metadata is provided since the Data could be anything)
-    
-    - Git:\ 
+    - Git:\
         "any DATA"
 
     - JSON-LD:
   ```json
-  {
-    "@id": "bed8945cb011eb0246d2ff6957518bee03e54fc0",\
+   {
+    "@id": "1a1f51f4a9194d5f010fe0c6e6bd395b09486061",
     "http://www.w3.org/ns/ldp#NonRDFSource": [
       {
-        "@id": "http://localhost:3000/objects/be/d8945cb011eb0246d2ff6957518bee03e54fc0"
+        "@id": "http://localhost:3000/orgs/south-summit/iotdot-mini/.dybli/objects/1a/1f51f4a9194d5f010fe0c6e6bd395b09486061"
       }
     ]
   }
+
   ```
 
     

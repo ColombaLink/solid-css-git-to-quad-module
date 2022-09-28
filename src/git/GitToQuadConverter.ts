@@ -56,22 +56,19 @@ export class GitToQuadConverter extends BaseTypedRepresentationConverter {
     let quad: Quad[];
 
     // Figure out the type of Git Object we are dealing with
-    const compare = result.readUInt8(2);
-    console.log(compare);
-    if (compare === 75) {
+    if (syncTxt.startsWith("blob")){
       this.logger.debug(' Found a Blob');
       const txtNoPrefix = syncTxt.slice(8, syncTxt.length);
       quad = GitUtils.blobToQuad(txtNoPrefix, oid, pathOfIdentifier);
-    } else if (compare === 43) {
+    } else if (syncTxt.startsWith("tree")){
       this.logger.debug('Found a Tree');
       quad = GitUtils.treeToQuad(unzip, pathOfIdentifier);
-    } else if (compare === 149 || compare === 141 || compare === 157) {
-      // todo: investigate why byte sequence is not static
+    } else if (syncTxt.startsWith("commit")) {
       this.logger.debug('Found a Commit');
       quad = GitUtils.commitToQuad(syncTxt, oid, pathOfIdentifier);
     } else {
       quad = [];
-      this.logger.debug('undefined object with start bytes: ' + compare);
+      this.logger.debug('undefined object with start bytes: ' + syncTxt.slice(0,6));
     }
     return new BasicRepresentation(quad, representation.metadata, INTERNAL_QUADS);
   }
